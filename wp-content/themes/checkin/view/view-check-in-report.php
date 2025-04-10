@@ -23,9 +23,9 @@ function sort_by_order($a, $b)
 ?>
 
 <div>
-    <div class="check-in-total">
-        <label><?php echo ' 登記總數 : ' . $registerTotal['COUNT(ID)']; ?></label>
-         <label><?php echo '出席總數 : ' . count($listGuests); ?></label>
+    <div class="statistical-total">
+        <div><?php echo ' 登記總數 : ' . $registerTotal['COUNT(ID)']; ?></div>
+        <div><?php echo '出席總數 : ' . count($listGuests); ?></div>
     </div>
 
     <div id="bao-cao">

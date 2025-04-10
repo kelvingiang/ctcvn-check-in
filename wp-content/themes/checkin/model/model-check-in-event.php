@@ -190,7 +190,7 @@ class Model_Check_In_Event extends WP_List_Table
         //Bar link
         $bar_url = add_query_arg('customvar', 'trash');
         $class = ($current == 'bar' ? ' class="current"' : '');
-        $views['bar'] = "<a href='{$bar_url}' {$class} >" . __('Trash') . "(" . $this->total_trash() . ")</a>";
+        $views['bar'] = "<a href='{$bar_url}' {$class} >" . __('回收桶') . "(" . $this->total_trash() . ")</a>";
 
         return $views;
     }
@@ -198,14 +198,14 @@ class Model_Check_In_Event extends WP_List_Table
     // CAC ITEM TRONG SELECT BOX CHUC NANG 'UNG DUNG'
     public function get_bulk_actions()
     {
-        if ($_GET['customvar'] == 'trash') {
+        if (isset($_GET['customvar']) && $_GET['customvar'] == 'trash') {
             $actions = array(
                 'restore' => __('Restore'),
                 'delete' => __('Delete Permanently'),
             );
         } else {
             $actions = array(
-                'trash' => __('Trash'),
+                'trash' => __('回收桶'),
             );
         }
         return $actions;
@@ -219,8 +219,10 @@ class Model_Check_In_Event extends WP_List_Table
     public function column_cb($item)
     {
         $singular = $this->_args['singular'];
-        $html = '<input type="checkbox" name="' . $singular . '[]" value="' . $item['ID'] . '-' . $item['barcode'] . '"/>';
-        return $html;
+        // if (array_key_exists('ID', $item) && array_key_exists('barcode', $item)) {
+            $html = '<input type="checkbox" name="' . $singular . '[]" value="' . $item['ID'] . '"/>';
+            return $html;
+        // }
     }
 
     // THEM CAC PHAN CHINH SUA NHANH TAI COLUMN NAY
@@ -233,7 +235,7 @@ class Model_Check_In_Event extends WP_List_Table
         //        $action = 'delete_id' . $item['id'];
         //        $linkDelete = wp_nonce_url($linkDelete, $action, $name);
 
-        if ($_GET['customvar'] == 'trash') {
+        if (isset($_GET['customvar']) && $_GET['customvar'] == 'trash') {
             $actions = array(
                 'restore' => '<a href=" ?page=' . $page . '&action=restore&id=' . $item['ID'] . ' " >' . __('Restore') . '</a>',
                 'delete' => '<a onclick="sureToDelete(event)" href=" ?page=' . $page . '&action=delete&id=' . $item['ID'] . ' " >' . __('Delete Permanently') . ' </a>',
@@ -244,9 +246,9 @@ class Model_Check_In_Event extends WP_List_Table
                 'edit' => '<a href=" ?page=' . $page . '&action=edit&id=' . $item['ID'] . ' " >' . __('Edit') . '</a>',
                 'active' => '<a href=" ?page=' . $page . '&action=active&id=' . $item['ID'] . ' " > ' . '啟用' . ' </a>',
                 'view' => '<a href=" ?page=' . $page . '&action=view&id=' . $item['ID'] . ' " > ' . '細節' . ' </a>',
-                'trash' => '<a href=" ?page=' . $page . '&action=trash&id=' . $item['ID'] . ' " > ' .'回收桶' . ' </a>',
+                'trash' => '<a href=" ?page=' . $page . '&action=trash&id=' . $item['ID'] . ' " > ' . '回收桶' . ' </a>',
                 'delete' => '<a onclick="sureToReset(event)" href=" ?page=' . $page . '&action=reset&id=' . $item['ID'] . ' " >刪除細節</a>',
-                
+
             );
         }
         $html = '<strong> <a href="?page=' . $page . '&action=edit&id=' . $item['ID'] . ' ">' . $item['title'] . '</a> </strong>' . $this->row_actions($actions);
@@ -289,7 +291,7 @@ class Model_Check_In_Event extends WP_List_Table
     // LAY GIA TRI MA THONG QUA QUA HAM get_country SHOW TEN RA
     public function column_status($item)
     {
-        if($item['status'] == '1'){
+        if ($item['status'] == '1') {
             echo '<div class="my_active"></div>';
         }
     }

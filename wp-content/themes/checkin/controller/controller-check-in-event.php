@@ -105,6 +105,7 @@ class Controller_Check_In_Event
     public function exportAction()
     {
         $id = getParams('id');
-        $this->_model->ExCheckInToExcelByID($id);
+        $this->_model->exportCheckIn($id);
+        // ToBack();
     }
 }

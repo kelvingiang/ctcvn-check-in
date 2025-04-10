@@ -137,7 +137,14 @@ class Admin_Model_Check_In_Setting
 
     /// =============================================
 
-
+    public function ExportGuests()
+    {
+        global $wpdb;
+        $table = $wpdb->prefix . 'guests';
+        $sql = "SELECT * FROM $table WHERE 1=1 ORDER BY `country` ASC, `status` DESC";
+        $row = $wpdb->get_results($sql, ARRAY_A);
+        export_excel_guests($row);
+    }
 
     public function ExportBarcode()
     {
@@ -183,12 +190,14 @@ class Admin_Model_Check_In_Setting
 
     public function create_QRCode()
     {
+
+        // create_QRCode('dddd');
         global $wpdb;
         $table = $wpdb->prefix . 'guests';
         $sql = "SELECT full_name, barcode FROM $table";
         $row = $wpdb->get_results($sql, ARRAY_A);
 
-        // XOA HET CAC FILE QRCODE .png CO TRONG FOLDER
+        // // XOA HET CAC FILE QRCODE .png CO TRONG FOLDER
         $files = glob(DIR_IMAGES_QRCODE . '*.png'); //get all file names
         foreach ($files as $file) {
             if (is_file($file))
@@ -196,152 +205,24 @@ class Admin_Model_Check_In_Setting
         }
 
         // TAO TAT CA CAC FILE QRCODE MOI
-        require_once(DIR_CLASS . 'qrcode' . DS . 'qrlib.php');
+        // require_once(DIR_CLASS . 'qrcode' . DS . 'qrlib.php');
         foreach ($row as $item) {
-
-            $filePath = DIR_IMAGES_QRCODE . $item['barcode'] . '.png';
-            $errorCorrectionLevel = "L";
-            $matrixPointSize = 3;
-            QRcode::png($item['barcode'], $filePath, $errorCorrectionLevel, $matrixPointSize, 2);
-
-            //********************************************************* */
-            //=== tạo thêm chữ trên file QRCode /   28/02/2025 
-            // them font NotoSansTC-Regular.ttf vào mục font tạo thêm define DIR_FONTS
-            //start  *********************************************************/
-            // 讀取 QR Code 圖片
-            $qrImage = imagecreatefrompng($filePath);
-            $qrWidth = imagesx($qrImage);
-            $qrHeight = imagesy($qrImage);
-
-            // **設定中文字型**
-            $fontPath = DIR_FONTS . 'NotoSansTC-Regular.ttf'; // 確保字型路徑正確
-            $fontSize = 9; // 字體大小
-            $textPadding = 5; // 文字與 QR Code 之間的距離
-
-            // **計算文字寬度**
-            $box = imagettfbbox($fontSize, 0, $fontPath, $item['full_name']);
-            $textWidth = abs($box[2] - $box[0]);
-            $textHeight = abs($box[7] - $box[1]);
-
-            // **建立新圖片（比 QR Code 高一點來放文字）**
-            $finalImage = imagecreatetruecolor($qrWidth, $qrHeight + $textHeight + $textPadding);
-            $white = imagecolorallocate($finalImage, 255, 255, 255);
-            $black = imagecolorallocate($finalImage, 0, 0, 0);
-
-            // **填充背景為白色**
-            imagefilledrectangle($finalImage, 0, 0, $qrWidth, $qrHeight + $textHeight + $textPadding, $white);
-            imagecopy($finalImage, $qrImage, 0, 0, 0, 0, $qrWidth, $qrHeight);
-
-            // **在 QR Code 下方添加中文文字**
-            $textX = ($qrWidth - $textWidth) / 2;
-            $textY = $qrHeight + $textHeight; // 文字放在 QR Code 下方
-            imagettftext($finalImage, $fontSize, 0, $textX, $textY, $black, $fontPath, $item['full_name']);
-
-            // **儲存最終圖片**
-            imagepng($finalImage, $filePath);
-
-            // **釋放記憶體**
-            imagedestroy($qrImage);
-            imagedestroy($finalImage);
+            create_QRCode($item['barcode'], $item['full_name']);
         }
     }
 
-    public function create_QRCode_Name()
-    {
-        global $wpdb;
-        $table = $wpdb->prefix . 'guests';
-        $sql = "SELECT full_name, barcode FROM $table";
-        $row = $wpdb->get_results($sql, ARRAY_A);
-        // XOA HET CAC FILE QRCODE .png CO TRONG FOLDER
-        $files = glob(DIR_IMAGES_QRCODE_NAME . '*.png'); //get all file names
-        foreach ($files as $file) {
-            if (is_file($file))
-                unlink($file); //delete file
-        }
-
-        // TAO TAT CA CAC FILE QRCODE MOI
-        require_once(DIR_CLASS . 'qrcode' . DS . 'qrlib.php');
-        foreach ($row as $item) {
-
-            $filePath = DIR_IMAGES_QRCODE_NAME . $item['barcode'] . '-' . $item['full_name'] . '.png';
-            $errorCorrectionLevel = "L";
-            $matrixPointSize = 3;
-            QRcode::png($item['barcode'], $filePath, $errorCorrectionLevel, $matrixPointSize, 2);
-
-            //********************************************************* */
-            //=== tạo thêm chữ trên file QRCode /   28/02/2025 
-            // them font NotoSansTC-Regular.ttf vào mục font tạo thêm define DIR_FONTS
-            //start  *********************************************************/
-            // 讀取 QR Code 圖片
-            $qrImage = imagecreatefrompng($filePath);
-            $qrWidth = imagesx($qrImage);
-            $qrHeight = imagesy($qrImage);
-
-            // **設定中文字型**
-            $fontPath = DIR_FONTS . 'NotoSansTC-Regular.ttf'; // 確保字型路徑正確
-            $fontSize = 9; // 字體大小
-            $textPadding = 5; // 文字與 QR Code 之間的距離
-
-            // **計算文字寬度**
-            $box = imagettfbbox($fontSize, 0, $fontPath, $item['full_name']);
-            $textWidth = abs($box[2] - $box[0]);
-            $textHeight = abs($box[7] - $box[1]);
-
-            // **建立新圖片（比 QR Code 高一點來放文字）**
-            $finalImage = imagecreatetruecolor($qrWidth, $qrHeight + $textHeight + $textPadding);
-            $white = imagecolorallocate($finalImage, 255, 255, 255);
-            $black = imagecolorallocate($finalImage, 0, 0, 0);
-
-            // **填充背景為白色**
-            imagefilledrectangle($finalImage, 0, 0, $qrWidth, $qrHeight + $textHeight + $textPadding, $white);
-            imagecopy($finalImage, $qrImage, 0, 0, 0, 0, $qrWidth, $qrHeight);
-
-            // **在 QR Code 下方添加中文文字**
-            $textX = ($qrWidth - $textWidth) / 2;
-            $textY = $qrHeight + $textHeight; // 文字放在 QR Code 下方
-            imagettftext($finalImage, $fontSize, 0, $textX, $textY, $black, $fontPath, $item['full_name']);
-
-            // **儲存最終圖片**
-            imagepng($finalImage, $filePath);
-
-            // **釋放記憶體**
-            imagedestroy($qrImage);
-            imagedestroy($finalImage);
-        }
-    }
 
     //=================================================================================
     public function ImportGuests($filename)
     {
-        require_once DIR_CLASS . 'PHPExcel.php';
-        $inputFileType = PHPExcel_IOFactory::identify($filename);
-        $objReader = PHPExcel_IOFactory::createReader($inputFileType);
-
-        // $objReader->setReadDataOnly(true);
-
-        /**  Load $inputFileName to a PHPExcel Object  * */
-        $objPHPExcel = $objReader->load("$filename");
-
-        $total_sheets = $objPHPExcel->getSheetCount();
-
-        $allSheetName = $objPHPExcel->getSheetNames();
-        $objWorksheet = $objPHPExcel->setActiveSheetIndex(0);
-        $highestRow = $objWorksheet->getHighestRow();
-        $highestColumn = $objWorksheet->getHighestColumn();
-        $highestColumnIndex = PHPExcel_Cell::columnIndexFromString($highestColumn);
-        $arrData = array();
-        for ($row = 2; $row <= $highestRow; ++$row) {
-            for ($col = 0; $col < $highestColumnIndex; ++$col) {
-                $value = $objWorksheet->getCellByColumnAndRow($col, $row)->getValue();
-                $arrData[$row - 2][$col] = $value;
-            }
-        }
+        $arrData = import_excel_guests($filename);
         global $wpdb;
         $table = $wpdb->prefix . 'guests';
         $wpdb->query("TRUNCATE TABLE $table");
 
         foreach ($arrData as $item) {
-            $note = $item[6] == null ? "" : $item[6];
+            $note = $item[10] == null ? "" : $item[10];
+            $img = $item[6] == null ? "" : $item[6];
             $phone = $item[4] == null ? "" : $item[4];
             $email = $item[3] == null ? "" : $item[3];
             $data = array(
@@ -351,7 +232,7 @@ class Admin_Model_Check_In_Setting
                 'email' => $email,
                 'phone' => $phone,
                 'barcode' => $this->setQRCode($item[1]),
-                // 'img' => $img,
+                'img' => $img,
                 // 'check_in' => $item[8],
                 'create_date' => date('d-m-Y'),
                 'status' => 1,
@@ -362,36 +243,15 @@ class Admin_Model_Check_In_Setting
     }
 
 
-    public function ImportGuestsUpdateInfo($filename)
+    public function ImportGuestsAdditional($filename)
     {
-        require_once DIR_CLASS . 'PHPExcel.php';
-        $inputFileType = PHPExcel_IOFactory::identify($filename);
-        $objReader = PHPExcel_IOFactory::createReader($inputFileType);
-
-        // $objReader->setReadDataOnly(true);
-
-        /**  Load $inputFileName to a PHPExcel Object  * */
-        $objPHPExcel = $objReader->load("$filename");
-
-        $total_sheets = $objPHPExcel->getSheetCount();
-
-        $allSheetName = $objPHPExcel->getSheetNames();
-        $objWorksheet = $objPHPExcel->setActiveSheetIndex(0);
-        $highestRow = $objWorksheet->getHighestRow();
-        $highestColumn = $objWorksheet->getHighestColumn();
-        $highestColumnIndex = PHPExcel_Cell::columnIndexFromString($highestColumn);
-        $arrData = array();
-        for ($row = 2; $row <= $highestRow; ++$row) {
-            for ($col = 0; $col < $highestColumnIndex; ++$col) {
-                $value = $objWorksheet->getCellByColumnAndRow($col, $row)->getValue();
-                $arrData[$row - 2][$col] = $value;
-            }
-        }
+        $arrData = import_excel_guests($filename);
         global $wpdb;
         $table = $wpdb->prefix . 'guests';
 
         foreach ($arrData as $item) {
-            $note = $item[6] == null ? "" : $item[6];
+            $note = $item[10] == null ? "" : $item[10];
+            $img = $item[6] == null ? "" : $item[6];
             $phone = $item[4] == null ? "" : $item[4];
             $email = $item[3] == null ? "" : $item[3];
             $data = array(
@@ -401,7 +261,7 @@ class Admin_Model_Check_In_Setting
                 'email' => $email,
                 'phone' => $phone,
                 'barcode' => $this->setQRCode($item[1]),
-                // 'img' => $img,
+                'img' => $img,
                 // 'check_in' => $item[8],
                 'create_date' => date('d-m-Y'),
                 'status' => 1,
@@ -413,7 +273,6 @@ class Admin_Model_Check_In_Setting
 
     public function setQRCode($code)
     {
-
         $length = 8;
         $characters = '0123456789';
         $charactersLength = strlen($characters);

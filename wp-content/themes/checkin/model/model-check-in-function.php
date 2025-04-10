@@ -86,24 +86,13 @@ class Model_Check_In_Function
     public function checkin($arrData = array(), $option = array())
     {
         global $wpdb;
-        // echo '<pre>';
-        // print_r($arrData);
-        // echo '</pre>';
-        // die($arrData);
-        // CHECK IN
-        // if ($arrData['check'] == 0) {
         $data = array(
             'guests_id' => $arrData['id'],
             'event_id' => $arrData['event_id'],
             'time' => date('H:i:s'),
             'date' => date('m-d-Y'),
         );
-        //     echo '<pre>';
-        // print_r($data2);
-        // echo '</pre>';
-
         $wpdb->insert($this->_table_detail, $data);
-        // }
     }
 
     public function deleteItem($arrData = array(), $option = array())
@@ -150,9 +139,14 @@ class Model_Check_In_Function
     {
         global $wpdb;
         if (isset($arrData['hidden_barcode']) and empty($arrData['hidden_barcode'])) {
-            $barcode = $this->createQRcode($arrData['sel_country'], $arrData['txt_fullname']);
+            // $barcode = $this->createQRcode($arrData['sel_country'], $arrData['txt_fullname']);
+            $t = time();
+            $cc = substr($t, -8);
+            $barcode =  $arrData['sel_country'] . $cc;
+            create_QRCode($barcode, $arrData['txt_fullname']);
+            // $barcode = $this->createQRcode($arrData['sel_country'], $arrData['txt_fullname']);
         } else {
-            if ($arrData['sel_country'] != $arrData['hidden_country']) {
+            if (isset($arrData['sel_country']) && $arrData['sel_country'] != $arrData['hidden_country']) {
                 // $barcode = $this->createQRcode($arrData['sel_country'], $arrData['txt_fullname']);
                 // delete the old barcode picture    
                 //$oldBarcode =    iconv('UTF-8','BIG5', DIR_IMAGES_QRCODE .$arrData['hidden_fullname'].'-'.$arrData['hidden_barcode'] . '.png');
@@ -162,7 +156,8 @@ class Model_Check_In_Function
                 //  unlink(DIR_IMAGES_QRCODE . $oldBarcode);
                 //}
             } else {
-                $barcode = $arrData['hidden_barcode'];
+                // $barcode = $arrData['hidden_barcode'];
+                $barcode = $arrData['hidden_barcode'] ?? null;
             }
         }
 
@@ -202,36 +197,37 @@ class Model_Check_In_Function
                 return $errors;
             }
         } else {
-            $cus_name = $arrData['hidden_img'];
+            $cus_name = $arrData['hidden_img'] ?? null;
+            // $barcode = $arrData['hidden_barcode'] ?? null;
         }
 
-        $appCode = isset($arrData['txt_appcode']) ? $arrData['txt_appcode'] : $arrData['hidden_appcode'];
+        $appCode = isset($arrData['txt_appcode']) ? $arrData['txt_appcode'] : $arrData['hidden_appcode'] ?? null;
 
 
 
         $data1 = array(
-            'full_name' => $arrData['txt_fullname'],
+            'full_name' => $arrData['txt_fullname'] ?? null,
             // 'barcode' => $barcode,
             //'app_code' => $appCode,
-            'country' => $arrData['sel_country'],
-            'position' => $arrData['txt_position'],
-            'email' => $arrData['txt_email'],
-            'phone' => $arrData['txt_phone'],
+            'country' => $arrData['sel_country'] ?? null,
+            'position' => $arrData['txt_position'] ?? null,
+            'email' => $arrData['txt_email'] ?? null,
+            'phone' => $arrData['txt_phone'] ?? null,
             'img' => $cus_name,
-            'note' => $arrData['txt_note'],
+            'note' => $arrData['txt_note'] ?? null,
         );
 
         $data2 = array(
             'barcode' => $barcode,
             'app_code' => $appCode,
-            'full_name' => $arrData['txt_fullname'],
-            'country' => $arrData['sel_country'],
-            'position' => $arrData['txt_position'],
-            'email' => $arrData['txt_email'],
-            'phone' => $arrData['txt_phone'],
+            'full_name' => $arrData['txt_fullname'] ?? null,
+            'country' => $arrData['sel_country'] ?? null,
+            'position' => $arrData['txt_position'] ?? null,
+            'email' => $arrData['txt_email'] ?? null,
+            'phone' => $arrData['txt_phone'] ?? null,
             'check_in' => '0',
             'img' => $cus_name,
-            'note' => $arrData['txt_note'],
+            'note' => $arrData['txt_note'] ?? null,
             'create_date' => date('d-m-Y'),
             'status' => '1'
         );

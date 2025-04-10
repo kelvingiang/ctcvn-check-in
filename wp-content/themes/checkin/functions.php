@@ -12,6 +12,8 @@ require_once(HELPER . 'define.php');
 require_once(HELPER . 'function.php');
 require_once(HELPER . 'style.php');
 require_once(HELPER . 'require.php');
+require_once(HELPER . 'function-excel.php');
+require_once(HELPER . 'function-qrcode.php');
 
 
 

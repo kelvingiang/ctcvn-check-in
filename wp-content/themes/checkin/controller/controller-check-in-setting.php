@@ -40,15 +40,9 @@ class Controller_Check_In_Setting
             case 'import_guests_info':
                 $this->ImportGuestsInfoAction();
                 break;
-
-
             case 'create_qrcode':
                 $this->CreateQRCodeAction();
                 break;
-            case 'create_qrcode_name':
-                $this->CreateNameQRCodeAction();
-                break;
-
             case 'open_qrcode_folder':
                 $this->openFOlderAction();
                 break;
@@ -67,6 +61,7 @@ class Controller_Check_In_Setting
     {
         //== mở folder bằng explorer ==================================
         $directory = get_post_meta(1, '_part_text', true);
+        
         // 检查目录是否存在
         if (is_dir($directory)) {
             // 使用 explorer 命令打开资源管理器并显示目录
@@ -79,6 +74,7 @@ class Controller_Check_In_Setting
 
     public function ExportGuestsAction()
     {
+
         $this->_model->ExportGuests();
     }
 
@@ -127,7 +123,7 @@ class Controller_Check_In_Setting
                 $excelList = $path . $file_name;
                 // require_once(DIR_MODEL . 'model_check_in_setting.php');
                 // $model = new Model_Check_In_Setting();
-                $this->_model->ImportGuestsUpdateInfo($excelList);
+                $this->_model->ImportGuestsAdditional($excelList);
 
                 //                ToBack();
             }
@@ -160,12 +156,8 @@ class Controller_Check_In_Setting
             if (empty($errors)) {
                 $path = DIR_FILE;
                 move_uploaded_file($file_tmp, ($path . $file_name));
-
                 $excelList = $path . $file_name;
-                // require_once(DIR_MODEL . 'model_check_in_setting.php');
-                // $model = new Model_Check_In_Setting();
                 $this->_model->ImportGuests($excelList);
-
                 ToBack();
             }
         }
@@ -179,11 +171,6 @@ class Controller_Check_In_Setting
         ToBack();
     }
 
-    public function CreateNameQRCodeAction()
-    {
-        $this->_model->create_QRCode_Name();
-        ToBack();
-    }
 
 
 }

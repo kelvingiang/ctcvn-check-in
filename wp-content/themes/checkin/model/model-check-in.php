@@ -122,7 +122,7 @@ class Model_Check_In extends WP_List_Table
 
         if (getParams('s') != ' ') {
             $s = esc_sql(getParams('s'));
-            $whereArr[] = "(m.full_name  LIKE '%$s%')";
+            $whereArr[] = "(m.full_name  LIKE '%$s%') OR (m.barcode = '$s')";
         }
 
         // CHUYEN CAC GIA TRI where KET VOI NHAU BOI and
@@ -132,19 +132,15 @@ class Model_Check_In extends WP_List_Table
 
         // orderby
         $sql .= 'ORDER BY m.' . esc_sql($orderby) . ' ' . esc_sql($order);
-
         $this->_sql = $sql;
-
 
         //LAY GIA TRI PHAN TRANG PAGEING
         $paged = max(1, @$_REQUEST['paged']);
         $offset = ($paged - 1) * $this->_pre_page;
-
         $sql .= ' LIMIT  ' . $this->_pre_page . ' OFFSET ' . $offset;
 
         // LAY KET QUA  THONG QUA CAU sql
         $data = $wpdb->get_results($sql, ARRAY_A);
-
         return $data;
     }
 
@@ -199,7 +195,7 @@ class Model_Check_In extends WP_List_Table
         //Bar link
         $bar_url = add_query_arg('customvar', 'trash');
         $class = ($current == 'bar' ? ' class="current"' : '');
-        $views['bar'] = "<a href='{$bar_url}' {$class} >" . __('Trash') . "(" . $this->total_trash() . ")</a>";
+        $views['bar'] = "<a href='{$bar_url}' {$class} >" . __('回收桶') . "(" . $this->total_trash() . ")</a>";
 
         return $views;
     }
@@ -207,7 +203,7 @@ class Model_Check_In extends WP_List_Table
     // CAC ITEM TRONG SELECT BOX CHUC NANG 'UNG DUNG'
     public function get_bulk_actions()
     {
-        if ($_GET['customvar'] == 'trash') {
+        if (isset($_GET['customvar']) && $_GET['customvar'] == 'trash') {
             $actions = array(
                 'restore' => __('還原'),
                 'delete' => __('永久刪除'),
@@ -261,7 +257,7 @@ class Model_Check_In extends WP_List_Table
     {
         $page = getParams('page');
 
-        if ($_GET['customvar'] == 'trash') {
+        if (isset($_GET['customvar']) && $_GET['customvar'] == 'trash') {
             $actions = array(
                 'restore' => '<a href=" ?page=' . $page . '&action=restore&id=' . $item['ID'] . ' " >還原</a>',
                 'delete' => '<a href=" ?page=' . $page . '&action=delete&id=' . $item['ID'] . ' " >永久刪除</a>',
@@ -291,8 +287,10 @@ class Model_Check_In extends WP_List_Table
         $sqlDetail = "SELECT * FROM $this->_table_check_in WHERE guests_id = '" . $item['ID'] . "' AND event_id = '" . $event['ID'] . "' ";
         $checkInDetail = $wpdb->get_row($sqlDetail, ARRAY_A);
 
+        // echo $checkInDetail['event_id'].'event';
+        // echo $event['ID'].'id';
         // // $page = getParams('page');
-        if ($checkInDetail['event_id'] == $event['ID']) {
+        if (isset($checkInDetail['event_id'])  && $checkInDetail['event_id'] == $event['ID']) {
             $action = 'inactive';
             $src = PART_ICON . 'active32x32.png';
         } else {
@@ -339,6 +337,4 @@ class Model_Check_In extends WP_List_Table
     {
         return $item[$column_name];
     }
-
-   
 }

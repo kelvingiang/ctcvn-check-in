@@ -14,7 +14,7 @@
             <a class="button button-primary" href="<?php echo "admin.php?page=$page&action=create_qrcode" ?>">批次產生 QRCode</a>
         </li>
         <li>
-            <a class="button button-primary" href="<?php echo "admin.php?page=$page&action=create_qrcode_name" ?>">批次產生含姓名 QRCode</a>
+            <a class="button button-primary" href="<?php echo "admin.php?page=$page&action=open_qrcode_folder" ?>">打開 QRCode 資料夾</a>
         </li>
     </ul>
     <hr />

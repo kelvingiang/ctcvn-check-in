@@ -51,23 +51,23 @@
 }
 
 //=====================================================================
-.check-in-total {
-    margin-bottom: 2rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    margin : 1rem 1rem;
-    width: 48%;
-    label {
-        color: #09638D;
-        letter-spacing: 1px;
-        margin-top: 0.5rem;
-        font: {
-            size: 1rem;
-            weight: bold;
-        }
-    }
-}
+// .check-in-total {
+//     margin-bottom: 2rem;
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: space-around;
+//     margin : 1rem 1rem;
+//     width: 48%;
+//     label {
+//         color: #09638D;
+//         letter-spacing: 1px;
+//         margin-top: 0.5rem;
+//         font: {
+//             size: 1rem;
+//             weight: bold;
+//         }
+//     }
+// }
 
 #bao-cao {
     width: 50%;
@@ -109,6 +109,31 @@
         }
     }
 }
+
+.check-in-head{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1rem;
+    
+    .check-in-total{
+        font-size: 1rem;
+        font-weight: bold;
+        color: #8d3909;
+    }
+}
+.statistical-total{
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    div{
+        font-size: 1rem;
+        font-weight: bold;
+        color: #8d3909;
+        margin: 1rem;
+    }
+}
+
 
 .check-in-content {
     padding: 2rem 1rem;

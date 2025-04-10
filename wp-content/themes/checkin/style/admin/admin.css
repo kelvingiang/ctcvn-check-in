@@ -86,20 +86,6 @@
   height: 1rem;
   border-radius: 1rem; }
 
-.check-in-total {
-  margin-bottom: 2rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  margin: 1rem 1rem;
-  width: 48%; }
-  .check-in-total label {
-    color: #09638D;
-    letter-spacing: 1px;
-    margin-top: 0.5rem;
-    font-size: 1rem;
-    font-weight: bold; }
-
 #bao-cao {
   width: 50%; }
   #bao-cao .bao-cao-header {
@@ -129,6 +115,26 @@
       font-size: 1rem; }
       #bao-cao .bao-cao-row div:nth-child(1) {
         flex: 2; }
+
+.check-in-head {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 1rem; }
+  .check-in-head .check-in-total {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #8d3909; }
+
+.statistical-total {
+  height: 50px;
+  display: flex;
+  flex-direction: row; }
+  .statistical-total div {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #8d3909;
+    margin: 1rem; }
 
 .check-in-content {
   padding: 2rem 1rem; }

@@ -7,7 +7,7 @@ $page =  getParams('page');
 $linkAdd  = admin_url('admin.php?page=' . $page . '&action=add');  // TAO LINH CHO ADD NEW
 $lblAdd    = "新增";
 if (getParams('msg') == 1) {
-    $msg .= '<div class="updated notice notice-success is-dismissible"><p> ' . __('Data adjustment is successful') . ' </p></div>';
+    $msg = '<div class="updated notice notice-success is-dismissible"><p> ' . __('Data adjustment is successful') . ' </p></div>';
 }
 ?>
 <div class="wrap">

@@ -95,24 +95,26 @@ class Controller_Check_In
             ToBack(1);
         }
         require_once(DIR_VIEW . 'from-check-in.php');
-        
     }
 
-  
+
 
     public function checkinAction()
     {
         global $wpdb;
-        
+
         $params = getParams();
         $table = $wpdb->prefix . 'guests_check_in';
-        
-        $sqlDetail = "SELECT * FROM $table WHERE guests_id =" . $params['id'] . " AND event_id = " . $params['event_id'];
+        $sqlDetail = $wpdb->prepare(
+            "SELECT * FROM $table WHERE guests_id = %d AND event_id = %d",
+            $params['id'],
+            $params['event_id']
+        );
         $detail = $wpdb->get_row($sqlDetail, ARRAY_A);
-       
-        if (count($detail) == ' ') {
+  
+        if (empty($detail)) {
             $this->_model->checkin($params);
-        }else{
+        } else {
             $this->_model->uncheckin($params);
         }
         ToBack();
