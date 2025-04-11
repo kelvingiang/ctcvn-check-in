@@ -12,7 +12,7 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 
 function export_excel_check_in($data)
 {
-    require_once __DIR__ . '/../vendor/autoload.php';
+    require_once __DIR__ . '/../../../vendor/autoload.php';
 
     $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
     $sheet = $spreadsheet->getActiveSheet();
@@ -67,11 +67,6 @@ function export_excel_check_in($data)
             $sheet->setCellValue('F' . $i, $val['time']);
             $sheet->setCellValue('G' . $i, $val['date']);
 
-            //            $checkInAll ="";
-            // if ($row[1]['Kind'] == "m") {
-            //     //$objPHPExcel->setActiveSheetIndex(0)->getStyle( $cell )->getFont()->setSize( 10 );
-            //     $exExport->setActiveSheetIndex(0)->getStyle("A$i:G$i")->getFill()->setFillType(\PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setARGB('00e9ebed');
-            // }
             $i++;
         }
     }
@@ -97,7 +92,7 @@ function export_excel_check_in($data)
 
 function export_excel_guests($data)
 {
-    require_once __DIR__ . '/../vendor/autoload.php';
+    require_once __DIR__ . '/../../../vendor/autoload.php';
 
     $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
     $sheet = $spreadsheet->getActiveSheet();
@@ -175,7 +170,7 @@ function export_excel_guests($data)
 
 function import_excel_guests($filePart)
 {
-    require_once __DIR__ . '/../vendor/autoload.php';
+    require_once __DIR__ . '/../../../vendor/autoload.php';
     $spreadsheet = IOFactory::load($filePart);
     $sheet = $spreadsheet->getActiveSheet();
     $data = $sheet->toArray();

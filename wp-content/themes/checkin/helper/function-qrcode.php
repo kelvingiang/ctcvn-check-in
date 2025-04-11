@@ -6,50 +6,67 @@ use Endroid\QrCode\Writer\PngWriter;
 
 function create_QRCode($code, $name)
 {
-    require_once __DIR__ . '/../vendor/QRCODE/autoload.php'; // 根據實際路徑調整
+    require_once __DIR__ . '/../../../vendor/autoload.php';
 
-    // 1. 建立 QRCode
     $qrCode = new QrCode($code);
     $qrCode->setSize(200);
-    $qrCode->setMargin(12);
+    $qrCode->setMargin(2);
 
     $writer = new PngWriter();
     $result = $writer->write($qrCode);
 
-    // 2. 取得圖像資源
     $imageData = $result->getString();
-    $image = imagecreatefromstring($imageData);
+    $qrImage = imagecreatefromstring($imageData);
 
-    // 3. 設定中文字型
-    $fontPath = __DIR__ . '/../fonts/NotoSansTC-Regular.ttf'; // 確保這個檔案存在
+    $fontPath = __DIR__ . '/../fonts/NotoSansTC-Regular.ttf';
     if (!file_exists($fontPath)) {
         die('字型檔不存在：' . $fontPath);
     }
 
-    // 4. 設定文字參數
-    $fontSize = 8; // 點數
+    $fontSize = 12;
     $text = $name;
-    $textColor = imagecolorallocate($image, 0, 0, 0); // 黑色
 
-    // 5. 計算文字尺寸（預估）
+    // 計算文字寬高
     $bbox = imagettfbbox($fontSize, 0, $fontPath, $text);
     $textWidth = abs($bbox[2] - $bbox[0]);
     $textHeight = abs($bbox[7] - $bbox[1]);
 
-    $imgWidth = imagesx($image);
-    $imgHeight = imagesy($image);
+    // QR Code 圖片大小
+    $qrWidth = imagesx($qrImage);
+    $qrHeight = imagesy($qrImage);
 
-    // 右下角座標（預留 5px 邊界）
-    $x = $imgWidth - $textWidth - 5;
-    $y = $imgHeight - 5;
+    // 新圖片高度：原 QR 高度 + 額外 20px 空間
+    $newHeight = $qrHeight + 15;
+    $newImage = imagecreatetruecolor($qrWidth, $newHeight);
 
-    // 6. 畫出中文字
-    imagettftext($image, $fontSize, 0, $x, $y, $textColor, $fontPath, $text);
+    // 填滿白底
+    $white = imagecolorallocate($newImage, 255, 255, 255);
+    imagefill($newImage, 0, 0, $white);
 
-    // 7. 儲存圖片
+    // 把 QR Code 複製到新圖像上（靠上貼）
+    imagecopy($newImage, $qrImage, 0, 0, 0, 0, $qrWidth, $qrHeight);
+
+    // 設定文字顏色
+    $black = imagecolorallocate($newImage, 0, 0, 0);
+    // ✅ 文字靠右對齊，並離底部 2px
+    // $textX = $qrWidth - $textWidth - 5; // 靠右，留 5px 邊界
+    $textX = ($qrWidth - $textWidth) / 2; // 在中間
+    $textY = $newHeight - 3;            // 離底 2px
+
+    imagettftext($newImage, $fontSize, 0, $textX, $textY, $black, $fontPath, $text);
+
+    // // 計算文字位置（水平置中，垂直在新增空間內）
+    // $textX = ($qrWidth - $textWidth) / 2;
+    // $textY = $qrHeight + ($textHeight + 5); // 放在下方空白內部中偏上
+
+    // // 寫文字
+    // imagettftext($newImage, $fontSize, 0, $textX, $textY, $black, $fontPath, $text);
+
+    // 儲存圖片
     $outputPath = __DIR__ . '/../images/qrcode/' . $code . '.png';
-    imagepng($image, $outputPath);
+    imagepng($newImage, $outputPath);
 
-    // 8. 清除圖像記憶體
-    imagedestroy($image);
+    // 清理
+    imagedestroy($qrImage);
+    imagedestroy($newImage);
 }

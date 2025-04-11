@@ -126,7 +126,6 @@ if (!empty($insert_id)) {
             </div>
             <div class="cell-text">
                 <input type="text" id="txt_email" name="txt_email" class="my-input email" value='<?php echo $data['email'] ?? null ?>' />
-                
             </div>
         </div>
 
