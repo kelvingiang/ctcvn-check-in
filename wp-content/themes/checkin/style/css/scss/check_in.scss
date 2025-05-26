@@ -10,7 +10,7 @@
         background-image: url("../../images/BG-1300x200.jpg");
         background-size: cover;
         background-repeat: no-repeat;
-        background-position: bottom -30px  right;
+        background-position: bottom -30px right;
         height: 200px;
         .logo {
             display: flex;
@@ -21,17 +21,23 @@
             h2 {
                 font-family:
                     "DFKai-SB",
-                    Microsoft YaHei,
-                    Arial,
+                    /* Windows */ "PingFang TC",
+                    /* macOS 預設繁中 */ "Heiti TC",
+                    /* 舊版 macOS 字體 */ "Microsoft JhengHei",
+                    /* Windows 常見繁中 */ "Microsoft YaHei",
+                    /* Windows 常見簡中 */ Arial,
                     sans-serif;
                 font-size: 1.5rem;
                 letter-spacing: 0.8rem;
             }
             h3 {
                 font-family:
-                    "Times New Roman",
-                    Microsoft YaHei,
-                    Arial,
+                    "DFKai-SB",
+                    /* Windows */ "PingFang TC",
+                    /* macOS 預設繁中 */ "Heiti TC",
+                    /* 舊版 macOS 字體 */ "Microsoft JhengHei",
+                    /* Windows 常見繁中 */ "Microsoft YaHei",
+                    /* Windows 常見簡中 */ Arial,
                     sans-serif;
                 font-size: 0.6rem;
             }
@@ -40,13 +46,18 @@
             }
         }
         .title {
-            text-align:left;
+            text-align: left;
             h1 {
                 color: #ff0000;
                 padding: 0rem 0 0.5rem;
                 font-family:
+                //Windows
                     "DFKai-SB",
-                    Microsoft YaHei,
+                    // macOS 預設繁中
+                    "PingFang TC",
+                    "Heiti TC",
+                    "Microsoft JhengHei",
+                    "Microsoft YaHei",
                     Arial,
                     sans-serif;
                 font-size: 2rem;
@@ -64,7 +75,6 @@
             input[type="text"] {
                 width: 70%;
                 height: 30px;
-                
             }
             button {
                 width: 28%;
@@ -106,8 +116,11 @@
                 margin: 2rem 1rem;
                 font-family:
                     "DFKai-SB",
-                    Microsoft YaHei,
-                    Arial,
+                    /* Windows */ "PingFang TC",
+                    /* macOS 預設繁中 */ "Heiti TC",
+                    /* 舊版 macOS 字體 */ "Microsoft JhengHei",
+                    /* Windows 常見繁中 */ "Microsoft YaHei",
+                    /* Windows 常見簡中 */ Arial,
                     sans-serif;
                 #last-check-in {
                     display: flex;
@@ -172,8 +185,11 @@
                             letter-spacing: 3px;
                             font-family:
                                 "DFKai-SB",
-                                Microsoft YaHei,
-                                Arial,
+                                /* Windows */ "PingFang TC",
+                                /* macOS 預設繁中 */ "Heiti TC",
+                                /* 舊版 macOS 字體 */ "Microsoft JhengHei",
+                                /* Windows 常見繁中 */ "Microsoft YaHei",
+                                /* Windows 常見簡中 */ Arial,
                                 sans-serif;
                             text-shadow: 2px 2px 6px #a3a3a3;
                         }
@@ -209,27 +225,33 @@
     text-align: center;
     padding-top: 20%;
     z-index: 5000;
-  }
+}
 
-  .ad-space{
+.ad-space {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding-top: 100px;
- 
-   
-    img{width: 150px;}
-    h3{
+
+    img {
+        width: 150px;
+    }
+    h3 {
         margin-top: 1rem;
         font-size: 1.5rem;
         font-weight: bold;
-        color: #02AFF0;
-        font-family: "DFKai-SB", Microsoft YaHei, Arial, sans-serif;
+        color: #02aff0;
+        font-family:
+            "DFKai-SB",
+            /* Windows */ "PingFang TC",
+            /* macOS 預設繁中 */ "Heiti TC",
+            /* 舊版 macOS 字體 */ "Microsoft JhengHei",
+            /* Windows 常見繁中 */ "Microsoft YaHei",
+            /* Windows 常見簡中 */ Arial,
+            sans-serif;
     }
-  }
-
-
+}
 
 //   .f-check-in{
 //     input[type="text"]{
@@ -242,4 +264,3 @@
 //     }
 
 //   }
-
