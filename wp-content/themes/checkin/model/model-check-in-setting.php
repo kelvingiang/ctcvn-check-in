@@ -207,10 +207,30 @@ class Admin_Model_Check_In_Setting
         // TAO TAT CA CAC FILE QRCODE MOI
         // require_once(DIR_CLASS . 'qrcode' . DS . 'qrlib.php');
         foreach ($row as $item) {
-            create_QRCode($item['barcode'], $item['full_name']);
+            create_QRCode($item['barcode'], $item['full_name'], 0);
         }
     }
 
+    public function create_QRCode_has_name()
+    {
+        global $wpdb;
+        $table = $wpdb->prefix . 'guests';
+        $sql = "SELECT full_name, barcode FROM $table";
+        $row = $wpdb->get_results($sql, ARRAY_A);
+
+        // // XOA HET CAC FILE QRCODE .png CO TRONG FOLDER
+        $files = glob(DIR_IMAGES_QRCODE_NAME . '*.png'); //get all file names
+        foreach ($files as $file) {
+            if (is_file($file))
+                unlink($file); //delete file
+        }
+
+        // TAO TAT CA CAC FILE QRCODE MOI
+        // require_once(DIR_CLASS . 'qrcode' . DS . 'qrlib.php');
+        foreach ($row as $item) {
+            create_QRCode($item['barcode'], $item['full_name'], 1);
+        }
+    }
 
     //=================================================================================
     public function ImportGuests($filename)

@@ -15,7 +15,7 @@ if (!empty(getParams('id'))) {
             <label> 報到標題 </label>
         </div>
         <div class="cell-text">
-            <input type="text" name="txt_title" class='my-input' value='<?php echo $data['title']; ?>' />
+            <input type="text" name="txt_title" class='my-input' value='<?php echo $data['title'] ?? null; ?>' />
         </div>
     </div>
 

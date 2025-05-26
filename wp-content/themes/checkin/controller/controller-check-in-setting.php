@@ -43,6 +43,9 @@ class Controller_Check_In_Setting
             case 'create_qrcode':
                 $this->CreateQRCodeAction();
                 break;
+            case 'create_qrcode_name':
+                $this->CreateQRCodeHasNameAction();
+                break;
             case 'open_qrcode_folder':
                 $this->openFOlderAction();
                 break;
@@ -61,7 +64,7 @@ class Controller_Check_In_Setting
     {
         //== mở folder bằng explorer ==================================
         $directory = get_post_meta(1, '_part_text', true);
-        
+
         // 检查目录是否存在
         if (is_dir($directory)) {
             // 使用 explorer 命令打开资源管理器并显示目录
@@ -171,6 +174,9 @@ class Controller_Check_In_Setting
         ToBack();
     }
 
-
-
+    public function CreateQRCodeHasNameAction()
+    {
+        $this->_model->create_QRCode_Has_name();
+        ToBack();
+    }
 }

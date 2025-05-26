@@ -4,7 +4,10 @@
 use Endroid\QrCode\QrCode;
 use Endroid\QrCode\Writer\PngWriter;
 
-function create_QRCode($code, $name)
+// $code là mã của QRCOde
+// $name là họ tên thành viên
+// $flag là nếu = 0 tên file không có tên thành viên, nếu = 1 tên file sẽ có tên thành viên
+function create_QRCode($code, $name, $flag)
 {
     require_once __DIR__ . '/../../../vendor/autoload.php';
 
@@ -63,8 +66,13 @@ function create_QRCode($code, $name)
     // imagettftext($newImage, $fontSize, 0, $textX, $textY, $black, $fontPath, $text);
 
     // 儲存圖片
-    $outputPath = __DIR__ . '/../images/qrcode/' . $code . '.png';
-    imagepng($newImage, $outputPath);
+    if ($flag == 0) {
+        $outputPath = __DIR__ . '/../images/qrcode/' . $code . '.png';
+        imagepng($newImage, $outputPath);
+    } elseif ($flag == 1) {
+        $outputPath = __DIR__ . '/../images/qrcode_name/' . $code . '-' . $name . '.png';
+        imagepng($newImage, $outputPath);
+    }
 
     // 清理
     imagedestroy($qrImage);
