@@ -10,7 +10,11 @@ function style_header_scripts()
         wp_register_style('awesome-style', THEME_PART . '/style/font-awesome.min.css', 'all');
         wp_enqueue_style('awesome-style');
 
+// <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
 
+
+  wp_register_style('chinese-font', "https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap", 'all');
+    wp_enqueue_style('chinese-font');
         //=======================================================================================
 
 
