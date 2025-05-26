@@ -280,14 +280,7 @@ root {
 
 .link-style {
   text-decoration: none;
-  font-family:  "DFKai-SB",
-                    // macOS 預設繁中
-                    "PingFang TC",
-                    "Heiti TC",
-                    "Microsoft JhengHei",
-                    "Microsoft YaHei",
-                    Arial,
-                    sans-serif;
+  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "DFKai-SB", Arial, sans-serif;
   font-size: calc(0.8rem + 0.6vw);
   font-weight: bold;
   color: $linkNormal;
@@ -413,14 +406,7 @@ ul.brach-list {
       font-size: 1.3rem;
       font-weight: bold;
       color: $linkNormal;
-      font-family:    "DFKai-SB",
-                    // macOS 預設繁中
-                    "PingFang TC",
-                    "Heiti TC",
-                    "Microsoft JhengHei",
-                    "Microsoft YaHei",
-                    Arial,
-                    sans-serif;;
+      font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "DFKai-SB", Arial, sans-serif;
     }
     label {
       display: flex;

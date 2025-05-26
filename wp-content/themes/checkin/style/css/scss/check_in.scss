@@ -19,26 +19,12 @@
             color: #ff0101;
             margin: 0rem 0;
             h2 {
-                font-family:
-                    "DFKai-SB",
-                    /* Windows */ "PingFang TC",
-                    /* macOS 預設繁中 */ "Heiti TC",
-                    /* 舊版 macOS 字體 */ "Microsoft JhengHei",
-                    /* Windows 常見繁中 */ "Microsoft YaHei",
-                    /* Windows 常見簡中 */ Arial,
-                    sans-serif;
+                font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "DFKai-SB", Arial, sans-serif;
                 font-size: 1.5rem;
                 letter-spacing: 0.8rem;
             }
             h3 {
-                font-family:
-                    "DFKai-SB",
-                    /* Windows */ "PingFang TC",
-                    /* macOS 預設繁中 */ "Heiti TC",
-                    /* 舊版 macOS 字體 */ "Microsoft JhengHei",
-                    /* Windows 常見繁中 */ "Microsoft YaHei",
-                    /* Windows 常見簡中 */ Arial,
-                    sans-serif;
+                font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "DFKai-SB", Arial, sans-serif;
                 font-size: 0.6rem;
             }
             img {
@@ -50,16 +36,7 @@
             h1 {
                 color: #ff0000;
                 padding: 0rem 0 0.5rem;
-                font-family:
-                //Windows
-                    "DFKai-SB",
-                    // macOS 預設繁中
-                    "PingFang TC",
-                    "Heiti TC",
-                    "Microsoft JhengHei",
-                    "Microsoft YaHei",
-                    Arial,
-                    sans-serif;
+                font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "DFKai-SB", Arial, sans-serif;
                 font-size: 2rem;
                 font-weight: bold;
             }
@@ -114,15 +91,8 @@
                 display: flex;
                 flex-direction: row;
                 margin: 2rem 1rem;
-                font-family:
-                    "DFKai-SB",
-                    /* Windows */ "PingFang TC",
-                    /* macOS 預設繁中 */ "Heiti TC",
-                    /* 舊版 macOS 字體 */ "Microsoft JhengHei",
-                    /* Windows 常見繁中 */ "Microsoft YaHei",
-                    /* Windows 常見簡中 */ Arial,
-                    sans-serif;
-                #last-check-in {
+                font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "DFKai-SB", Arial, sans-serif;
+                F #last-check-in {
                     display: flex;
                     flex-direction: row;
                     justify-content: space-between;
@@ -183,13 +153,7 @@
                             font-size: 3rem;
                             color: rgb(9, 57, 88);
                             letter-spacing: 3px;
-                            font-family:
-                                "DFKai-SB",
-                                /* Windows */ "PingFang TC",
-                                /* macOS 預設繁中 */ "Heiti TC",
-                                /* 舊版 macOS 字體 */ "Microsoft JhengHei",
-                                /* Windows 常見繁中 */ "Microsoft YaHei",
-                                /* Windows 常見簡中 */ Arial,
+                            font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "DFKai-SB", Arial,
                                 sans-serif;
                             text-shadow: 2px 2px 6px #a3a3a3;
                         }
@@ -242,14 +206,7 @@
         font-size: 1.5rem;
         font-weight: bold;
         color: #02aff0;
-        font-family:
-            "DFKai-SB",
-            /* Windows */ "PingFang TC",
-            /* macOS 預設繁中 */ "Heiti TC",
-            /* 舊版 macOS 字體 */ "Microsoft JhengHei",
-            /* Windows 常見繁中 */ "Microsoft YaHei",
-            /* Windows 常見簡中 */ Arial,
-            sans-serif;
+        font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "DFKai-SB", Arial, sans-serif;
     }
 }
 

@@ -264,7 +264,7 @@ root {
 
 .link-style {
   text-decoration: none;
-  font-family: "DFKai-SB", "PingFang TC", "Heiti TC", "Microsoft JhengHei", "Microsoft YaHei", Arial, sans-serif;
+  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "DFKai-SB", Arial, sans-serif;
   font-size: calc(0.8rem + 0.6vw);
   font-weight: bold;
   color: #05688f;
@@ -374,7 +374,7 @@ ul.brach-list {
       font-size: 1.3rem;
       font-weight: bold;
       color: #05688f;
-      font-family: "DFKai-SB", "PingFang TC", "Heiti TC", "Microsoft JhengHei", "Microsoft YaHei", Arial, sans-serif; }
+      font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "DFKai-SB", Arial, sans-serif; }
     .recruiter-list li label {
       display: flex;
       align-self: flex-end;
@@ -487,11 +487,11 @@ input:focus::placeholder {
     color: #ff0101;
     margin: 0rem 0; }
     .check-in-space .header .logo h2 {
-      font-family: "DFKai-SB", "PingFang TC", "Heiti TC", "Microsoft JhengHei", "Microsoft YaHei", Arial, sans-serif;
+      font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "DFKai-SB", Arial, sans-serif;
       font-size: 1.5rem;
       letter-spacing: 0.8rem; }
     .check-in-space .header .logo h3 {
-      font-family: "DFKai-SB", "PingFang TC", "Heiti TC", "Microsoft JhengHei", "Microsoft YaHei", Arial, sans-serif;
+      font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "DFKai-SB", Arial, sans-serif;
       font-size: 0.6rem; }
     .check-in-space .header .logo img {
       width: 5rem; }
@@ -500,7 +500,7 @@ input:focus::placeholder {
     .check-in-space .header .title h1 {
       color: #ff0000;
       padding: 0rem 0 0.5rem;
-      font-family: "DFKai-SB", "PingFang TC", "Heiti TC", "Microsoft JhengHei", "Microsoft YaHei", Arial, sans-serif;
+      font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "DFKai-SB", Arial, sans-serif;
       font-size: 2rem;
       font-weight: bold; }
 .check-in-space .content {
@@ -540,12 +540,12 @@ input:focus::placeholder {
       display: flex;
       flex-direction: row;
       margin: 2rem 1rem;
-      font-family: "DFKai-SB", "PingFang TC", "Heiti TC", "Microsoft JhengHei", "Microsoft YaHei", Arial, sans-serif; }
-      .check-in-space .content-info .content-welcome #last-check-in {
+      font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "DFKai-SB", Arial, sans-serif; }
+      .check-in-space .content-info .content-welcome F #last-check-in {
         display: flex;
         flex-direction: row;
         justify-content: space-between; }
-        .check-in-space .content-info .content-welcome #last-check-in label {
+        .check-in-space .content-info .content-welcome F #last-check-in label {
           color: #999;
           font-size: 1rem; }
       .check-in-space .content-info .content-welcome div {
@@ -589,7 +589,7 @@ input:focus::placeholder {
             font-size: 3rem;
             color: #093958;
             letter-spacing: 3px;
-            font-family: "DFKai-SB", "PingFang TC", "Heiti TC", "Microsoft JhengHei", "Microsoft YaHei", Arial, sans-serif;
+            font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "DFKai-SB", Arial, sans-serif;
             text-shadow: 2px 2px 6px #a3a3a3; }
     .check-in-space .content-info #barcode-error {
       display: none;
@@ -630,4 +630,4 @@ input:focus::placeholder {
     font-size: 1.5rem;
     font-weight: bold;
     color: #02aff0;
-    font-family: "DFKai-SB", "PingFang TC", "Heiti TC", "Microsoft JhengHei", "Microsoft YaHei", Arial, sans-serif; }
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "DFKai-SB", Arial, sans-serif; }
