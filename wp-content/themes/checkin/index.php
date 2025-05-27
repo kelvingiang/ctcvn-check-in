@@ -8,8 +8,10 @@
     <div class="content-form">
         <div class="f-check-in">
             <form name="check-form" id="check-form" method="post" action="">
-                <input type="text" id="txt-barcode" name="txt-barcode" placeholder="輸入條碼" required />
-                <button type="submit" id="btn-submit" name="btn-submit">提交</button>
+                <div class="input-wrapper">
+                    <input type="text" id="txt-barcode" name="txt-barcode" placeholder="輸入條碼" required />
+                    <button type="button" id="btn-submit" name="btn-submit">提交</button>
+                </div>
             </form>
         </div>
         <div class="ad-space">
@@ -20,7 +22,9 @@
     <div class="content-info">
         <div class="content-welcome">
             <div>
-                <h2>歡迎光臨</h2>
+                <div class="guest_name">
+                    <label id="guest_name">&nbsp;</label>
+                </div>
             </div>
         </div>
         <div id="barcode-error">條 碼 不 正 確 ! </div>
@@ -31,9 +35,9 @@
             </div>
 
             <div class="guest-info">
-                <div class="guest_name">
+                <!-- <div class="guest_name">
                     <label id="guest_name">&nbsp;</label>
-                </div>
+                </div> -->
                 <div>
                     <label>職 稱 : </label>
                     <label id="guest_position">&nbsp;</label>
@@ -69,8 +73,20 @@
 
         jQuery("#txt-barcode").focus();
 
-        jQuery('#check-form').submit(function(e) { //     console.log(objInfo);
-            var barcode = jQuery('#txt-barcode').val();
+        jQuery('#btn-submit').click(function(e) { //     console.log(objInfo);
+            e.preventDefault();
+            submitAction();
+        });
+
+        jQuery('#txt-barcode').keydown(function(e) {
+            if (e.key === "Enter" || e.keyCode === 13) {
+                e.preventDefault(); // 避免表單自動提交
+                submitAction();
+            }
+        });
+
+        function submitAction() {
+            var barcode = jQuery('#txt-barcode').val().trim();
             jQuery('.my-waiting').css('display', 'block');
 
 
@@ -84,16 +100,17 @@
                 success: function(
                     data) { // set ket qua tra ve  data tra ve co thanh phan status va message
                     if (data.status === 'done') {
+                        jQuery("#guest_name").show();
                         jQuery("#txt-barcode").val('');
                         //window.location.reload();  
                         jQuery('#barcode-error, #barcode-unactive').css('display', 'none');
-                        jQuery('#last-check-in, #guest-main').css('display', 'flex');
+                        jQuery('#last-check-in, #last-check-in-time, #guest-main').css('display', 'flex');
                         jQuery('#last-check-in').children().remove();
                         jQuery('#last-check-in-time').children().remove();
                         if (data.info.TotalTimes !== "0") {
-                            jQuery('#last-check-in').append("<label>登入次數 : " + data.info
+                            jQuery('#last-check-in').append("<label>次數 : </label> <label>" + data.info
                                 .TotalTimes + " 次  </label>");
-                            jQuery('#last-check-in-time').append("<label>上次登入 : " + data.info
+                            jQuery('#last-check-in-time').append("<label>時間 : </label> <label>" + data.info
                                 .LastCheckIn + "</label>");
                         }
                         jQuery('#guest_name').text(data.info.FullName);
@@ -111,7 +128,7 @@
 
                     } else if (data.status === 'error') {
                         jQuery("#txt-barcode").val('');
-                        jQuery('#guest-main, #last-check-in, #last-check-in-time, #barcode-unactive').css('display',
+                        jQuery('#guest-main, #last-check-in, #last-check-in-time, #barcode-unactive, #guest_name').css('display',
                             'none');
                         jQuery('#barcode-error').css('display', 'block');
                         window.setTimeout(function() {
@@ -119,7 +136,7 @@
                         }, 100);
                     } else if (data.status === "unactive") {
                         jQuery("#txt-barcode").val('');
-                        jQuery('#guest-main, #last-check-in, #last-check-in-time,#barcode-error').css('display',
+                        jQuery('#guest-main, #last-check-in, #last-check-in-time, #barcode-error, #guest_name').css('display',
                             'none');
                         jQuery('#barcode-unactive').css('display', 'block');
                         window.setTimeout(function() {
@@ -132,7 +149,6 @@
                     //console.log(data.status);
                 }
             });
-            e.preventDefault();
-        });
+        }
     });
 </script>

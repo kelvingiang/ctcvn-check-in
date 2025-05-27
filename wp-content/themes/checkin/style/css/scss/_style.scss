@@ -548,3 +548,25 @@ input:focus::placeholder {
     }
   }
 }
+
+.input-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 300px;
+}
+#txt-barcode {
+    width: 100%;
+    padding-right: 80px; /* 給按鈕預留空間 */
+    box-sizing: border-box;
+}
+#btn-submit {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    border: none;
+    background-color: #7c7c7c;
+    color: white;
+    padding: 0 15px;
+    cursor: pointer;
+}
