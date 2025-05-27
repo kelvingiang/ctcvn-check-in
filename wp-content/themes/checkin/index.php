@@ -87,68 +87,68 @@
 
         function submitAction() {
             var barcode = jQuery('#txt-barcode').val().trim();
-            jQuery('.my-waiting').css('display', 'block');
+            if (barcode != '') {
+                jQuery('.my-waiting').css('display', 'block');
+                jQuery.ajax({
+                    url: '<?php echo get_template_directory_uri() . '/ajax/updata-checkin.php' ?>', // lay doi tuong chuyen sang dang array
+                    type: 'post', //                data: $(this).serialize(),
+                    data: {
+                        id: barcode
+                    },
+                    dataType: 'json',
+                    success: function(
+                        data) { // set ket qua tra ve  data tra ve co thanh phan status va message
+                        if (data.status === 'done') {
+                            jQuery("#guest_name").show();
+                            jQuery("#txt-barcode").val('');
+                            //window.location.reload();  
+                            jQuery('#barcode-error, #barcode-unactive').css('display', 'none');
+                            jQuery('#last-check-in, #last-check-in-time, #guest-main').css('display', 'flex');
+                            jQuery('#last-check-in').children().remove();
+                            jQuery('#last-check-in-time').children().remove();
+                            if (data.info.TotalTimes !== "0") {
+                                jQuery('#last-check-in').append("<label>次數 : </label> <label>" + data.info
+                                    .TotalTimes + " 次  </label>");
+                                jQuery('#last-check-in-time').append("<label>時間 : </label> <label>" + data.info
+                                    .LastCheckIn + "</label>");
+                            }
+                            jQuery('#guest_name').text(data.info.FullName);
+                            jQuery('#guest_position').text(data.info.Position);
+                            jQuery('#guest_country').text(data.info.Country);
+                            jQuery('#guest_email').text(data.info.Email);
+                            jQuery('#guest_phone').text(data.info.Phone);
+                            jQuery('#guest_note').text(data.info.Note);
+                            jQuery('#guest-pic').remove();
+                            jQuery('#guest-picture').append(data.info.Img);
+                            //window.location.reload();
+                            window.setTimeout(function() {
+                                jQuery('.my-waiting').css('display', 'none');
+                            }, 100);
 
-
-            jQuery.ajax({
-                url: '<?php echo get_template_directory_uri() . '/ajax/updata-checkin.php' ?>', // lay doi tuong chuyen sang dang array
-                type: 'post', //                data: $(this).serialize(),
-                data: {
-                    id: barcode
-                },
-                dataType: 'json',
-                success: function(
-                    data) { // set ket qua tra ve  data tra ve co thanh phan status va message
-                    if (data.status === 'done') {
-                        jQuery("#guest_name").show();
-                        jQuery("#txt-barcode").val('');
-                        //window.location.reload();  
-                        jQuery('#barcode-error, #barcode-unactive').css('display', 'none');
-                        jQuery('#last-check-in, #last-check-in-time, #guest-main').css('display', 'flex');
-                        jQuery('#last-check-in').children().remove();
-                        jQuery('#last-check-in-time').children().remove();
-                        if (data.info.TotalTimes !== "0") {
-                            jQuery('#last-check-in').append("<label>次數 : </label> <label>" + data.info
-                                .TotalTimes + " 次  </label>");
-                            jQuery('#last-check-in-time').append("<label>時間 : </label> <label>" + data.info
-                                .LastCheckIn + "</label>");
+                        } else if (data.status === 'error') {
+                            jQuery("#txt-barcode").val('');
+                            jQuery('#guest-main, #last-check-in, #last-check-in-time, #barcode-unactive, #guest_name').css('display',
+                                'none');
+                            jQuery('#barcode-error').css('display', 'block');
+                            window.setTimeout(function() {
+                                jQuery('.my-waiting').css('display', 'none');
+                            }, 100);
+                        } else if (data.status === "unactive") {
+                            jQuery("#txt-barcode").val('');
+                            jQuery('#guest-main, #last-check-in, #last-check-in-time, #barcode-error, #guest_name').css('display',
+                                'none');
+                            jQuery('#barcode-unactive').css('display', 'block');
+                            window.setTimeout(function() {
+                                jQuery('.my-waiting').css('display', 'none');
+                            }, 100);
                         }
-                        jQuery('#guest_name').text(data.info.FullName);
-                        jQuery('#guest_position').text(data.info.Position);
-                        jQuery('#guest_country').text(data.info.Country);
-                        jQuery('#guest_email').text(data.info.Email);
-                        jQuery('#guest_phone').text(data.info.Phone);
-                        jQuery('#guest_note').text(data.info.Note);
-                        jQuery('#guest-pic').remove();
-                        jQuery('#guest-picture').append(data.info.Img);
-                        //window.location.reload();
-                        window.setTimeout(function() {
-                            jQuery('.my-waiting').css('display', 'none');
-                        }, 100);
-
-                    } else if (data.status === 'error') {
-                        jQuery("#txt-barcode").val('');
-                        jQuery('#guest-main, #last-check-in, #last-check-in-time, #barcode-unactive, #guest_name').css('display',
-                            'none');
-                        jQuery('#barcode-error').css('display', 'block');
-                        window.setTimeout(function() {
-                            jQuery('.my-waiting').css('display', 'none');
-                        }, 100);
-                    } else if (data.status === "unactive") {
-                        jQuery("#txt-barcode").val('');
-                        jQuery('#guest-main, #last-check-in, #last-check-in-time, #barcode-error, #guest_name').css('display',
-                            'none');
-                        jQuery('#barcode-unactive').css('display', 'block');
-                        window.setTimeout(function() {
-                            jQuery('.my-waiting').css('display', 'none');
-                        }, 100);
+                    },
+                    error: function(xhr) {
+                        console.log(xhr.reponseText);
+                        //console.log(data.status);
                     }
-                },
-                error: function(xhr) {
-                    console.log(xhr.reponseText);
-                    //console.log(data.status);
-                }
-            });
+                });
+            }
         }
     });
 </script>
