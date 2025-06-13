@@ -12,7 +12,7 @@ function create_QRCode($code, $name, $flag)
     require_once __DIR__ . '/../../../vendor/autoload.php';
 
     $qrCode = new QrCode($code);
-    $qrCode->setSize(200);
+    $qrCode->setSize(70);
     $qrCode->setMargin(2);
 
     $writer = new PngWriter();
@@ -26,7 +26,7 @@ function create_QRCode($code, $name, $flag)
         die('字型檔不存在：' . $fontPath);
     }
 
-    $fontSize = 12;
+    $fontSize = 9;
     $text = $name;
 
     // 計算文字寬高
@@ -39,7 +39,7 @@ function create_QRCode($code, $name, $flag)
     $qrHeight = imagesy($qrImage);
 
     // 新圖片高度：原 QR 高度 + 額外 20px 空間
-    $newHeight = $qrHeight + 15;
+    $newHeight = $qrHeight + 10;
     $newImage = imagecreatetruecolor($qrWidth, $newHeight);
 
     // 填滿白底
