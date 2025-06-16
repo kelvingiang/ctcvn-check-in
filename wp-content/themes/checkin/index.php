@@ -9,7 +9,7 @@
         <div class="f-check-in">
             <form name="check-form" id="check-form" method="post" action="">
                 <div class="input-wrapper">
-                    <input type="text" id="txt-barcode" name="txt-barcode" placeholder="輸入條碼" required />
+                    <input type="text" id="txt-barcode" name="txt-barcode" placeholder="輸入條碼" required autocomplete="off"/>
                     <button type="button" id="btn-submit" name="btn-submit">提交</button>
                 </div>
             </form>
@@ -123,7 +123,7 @@
                             //window.location.reload();
                             window.setTimeout(function() {
                                 jQuery('.my-waiting').css('display', 'none');
-                            }, 100);
+                            }, 600);
 
                         } else if (data.status === 'error') {
                             jQuery("#txt-barcode").val('');

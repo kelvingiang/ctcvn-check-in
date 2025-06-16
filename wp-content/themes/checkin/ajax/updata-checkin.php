@@ -56,7 +56,7 @@ if (!empty($a_barcode)) {
         if (!empty($row['img'])) {
             $img = "<img id='guest-pic'  name='guest-pic' src= '" . PART_IMAGES_GUESTS . $row['img'] . "'/>";
         } else {
-            $img = "<img id= 'guest-pic' name = 'guest-pic' src ='" . PART_IMAGES . 'logo.png' . "'/>";
+            $img = "<img id= 'guest-pic' style='width:500px; opacity:0.2' name = 'guest-pic' src ='" . PART_IMAGES . 'logo.png' . "'/>";
         }
         require_once DIR_CODES . 'my-list.php';
         $myList = new Codes_My_List();
