@@ -647,19 +647,21 @@ input:focus::placeholder {
   background-repeat: no-repeat;
   background-position: bottom -30px right;
   height: 210px;
+  border-bottom: 1px dotted #666;
 }
 .check-in-space .header .logo {
   display: flex;
   flex-direction: row;
   align-items: center;
   color: #b11703;
-  margin: 0rem 0;
+  margin: 1rem 0;
 }
 .check-in-space .header .logo h2 {
   font-family: DFKai, "BiauKai", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
   font-size: 1.5rem;
   letter-spacing: 0.8rem;
   font-weight: bold;
+  text-shadow: 2px 2px 6px #a3a3a3;
 }
 .check-in-space .header .logo h3 {
   padding-top: 2px;
@@ -679,6 +681,7 @@ input:focus::placeholder {
   font-family: "DFKai", Arial, sans-serif;
   font-size: 2rem;
   font-weight: bold;
+  text-shadow: 2px 2px 6px #a3a3a3;
 }
 .check-in-space .content {
   display: flex;
