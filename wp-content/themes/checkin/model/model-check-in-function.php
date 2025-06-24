@@ -143,7 +143,7 @@ class Model_Check_In_Function
             $t = time();
             $cc = substr($t, -8);
             $barcode =  $arrData['sel_country'] . $cc;
-            create_QRCode($barcode, $arrData['txt_fullname']);
+            create_QRCode($barcode, $arrData['txt_fullname'], 0);
             // $barcode = $this->createQRcode($arrData['sel_country'], $arrData['txt_fullname']);
         } else {
             if (isset($arrData['sel_country']) && $arrData['sel_country'] != $arrData['hidden_country']) {
