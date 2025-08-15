@@ -284,9 +284,6 @@ class Model_Check_In extends WP_List_Table
         $sqlDetail = "SELECT * FROM $this->_table_check_in WHERE guests_id = '" . $item['ID'] . "' AND event_id = '" . $event['ID'] . "' ";
         $checkInDetail = $wpdb->get_row($sqlDetail, ARRAY_A);
 
-        // echo $checkInDetail['event_id'].'event';
-        // echo $event['ID'].'id';
-        // // $page = getParams('page');
         if (isset($checkInDetail['event_id'])  && $checkInDetail['event_id'] == $event['ID']) {
             $action = 'inactive';
             $src = PART_ICON . 'active32x32.png';
