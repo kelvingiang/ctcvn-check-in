@@ -289,7 +289,7 @@ class Admin_Model_Check_In_Setting
             );
             $wpdb->insert($table, $data);
         }
-    }
+    } 
 
     public function setQRCode($code)
     {
