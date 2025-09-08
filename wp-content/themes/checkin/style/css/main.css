@@ -13,6 +13,12 @@ a:link {
   margin: 0 !important;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 @font-face {
   font-family: "DFKai";
   src: url("../../fonts/kaiu.ttf") format("woff2");
@@ -517,16 +523,8 @@ ul.brach-list {
   padding: 0.5rem;
 }
 
-input::-moz-placeholder {
-  color: #999;
-}
-
 input::placeholder {
   color: #999;
-}
-
-input:focus::-moz-placeholder {
-  color: transparent;
 }
 
 input:focus::placeholder {
@@ -645,9 +643,10 @@ input:focus::placeholder {
   background-image: url("../../images/BG-1300x200.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: bottom -30px right;
+  background-position: right bottom(-30%);
   height: 210px;
   border-bottom: 1px dotted #666;
+  background-color: #666;
 }
 .check-in-space .header .logo {
   display: flex;
