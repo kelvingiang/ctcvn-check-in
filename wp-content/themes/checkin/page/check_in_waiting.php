@@ -1,3 +1,4 @@
+<?php //Template Name: Check In Waiting ?>
 <?php get_template_part('templates/template', 'header') ?>
 <div>
     <div class=" col-lg-12" style="text-align: center; height:300px; line-height: 300px;">
