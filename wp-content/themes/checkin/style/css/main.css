@@ -478,11 +478,13 @@ ul.brach-list {
   padding-left: 1.8rem;
   display: flex;
   justify-content: space-between;
-  padding: 1rem;
 }
 .recruiter-list li:nth-child(odd) {
   border-bottom: 1px #d8d8d8 dotted;
   background-color: rgba(248, 248, 248, 0.7333333333);
+}
+.recruiter-list li {
+  padding: 1rem;
 }
 .recruiter-list li a {
   display: block;
@@ -523,16 +525,8 @@ ul.brach-list {
   padding: 0.5rem;
 }
 
-input::-moz-placeholder {
-  color: #999;
-}
-
 input::placeholder {
   color: #999;
-}
-
-input:focus::-moz-placeholder {
-  color: transparent;
 }
 
 input:focus::placeholder {
@@ -648,13 +642,9 @@ input:focus::placeholder {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-image: url("../../images/BG-1300-20-12.jpg");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: right calc(100% - 0px);
-  height: 279px;
+  height: 200px;
   border-bottom: 1px dotted #666;
-  background-color: #666;
+  background-color: #7e0101;
 }
 .check-in-space .header .logo {
   display: flex;
