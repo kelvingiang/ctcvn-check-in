@@ -21,8 +21,9 @@
         -webkit-animation-iteration-count: infinite;
         /* Safari 4.0 - 8.0 */
         animation-name: example;
-        animation-duration: 5s;
+        animation-duration: 10s;
         animation-iteration-count: infinite;
+        
 
     }
 
@@ -30,22 +31,18 @@
     /* Safari 4.0 - 8.0 */
     @-webkit-keyframes example {
         0% {
-            color: #fff;
-            font-size: 8rem
+            color: #a94502;
+            font-size: 6rem
         }
-
-
 
         50% {
             color: #057cfc;
-            font-size: 10rem
+            font-size: 8rem
         }
 
-
-
         100% {
-            color: #fff;
-            font-size: 8rem
+            color: #a94502;
+            font-size: 6rem
         }
     }
 

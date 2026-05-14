@@ -29,16 +29,25 @@ $active_event = $model_event->getActiveItem();
 ?>
 
 <body>
-    <div class="check-in-space">
-        <div class="header">
-            <div class="logo">
-                <img src="<?php echo PART_IMAGES . 'logoctcvn.png' ?>" alt="ctcvn_logo" title="ctcvn_logo" />
-                <div>
-                    <h2>越南台灣商會聯合總</h2>
-                    <h3>THE COUNCIL OF TAIWANESE CHAMBERS OF COMMERCE IN VIETNAM </h3>
-                </div>
-            </div>
-            <div class="title">
-                <h1><?php echo $active_event['title']; ?></h1>
+    <div class="my-header">
+        <div class="logo">
+            <img src="<?php echo PART_IMAGES . 'logoctcvn.png' ?>" alt="ctcvn_logo" title="ctcvn_logo" />
+            <div>
+                <h2>越南台灣商會聯合總</h2>
+                <h3>THE COUNCIL OF TAIWANESE CHAMBERS OF COMMERCE IN VIETNAM </h3>
             </div>
         </div>
+        <div >
+              <div class="search-container">
+        <div class="modern-search-box">
+            <input type="text" id="txt-barcode" name="txt-barcode" placeholder="輸入條碼 (Nhập mã vạch)..." required autocomplete="off" />
+            <div id="last-check-in"> </div>
+        </div>
+    </div>
+          
+        </div>
+    </div>
+
+    <div class="title">
+        <h1><?php echo $active_event['title']; ?></h1>
+    </div>

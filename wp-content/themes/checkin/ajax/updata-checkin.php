@@ -1,10 +1,10 @@
 <?php
-
 define('WP_USE_THEMES', false);
-require('../../../../wp-load.php');
+// Load wp-load.php an toàn
+require_once(dirname(__FILE__) . '/../../../../wp-load.php'); 
 date_default_timezone_set('Asia/Ho_Chi_Minh');
 
-$a_barcode = $_POST['id'];
+$a_barcode = isset($_POST['id']) ? sanitize_text_field(trim($_POST['id'])) : '';
 
 if (!empty($a_barcode)) {
     global $wpdb;
@@ -12,73 +12,88 @@ if (!empty($a_barcode)) {
     $tbl_check_in  = $wpdb->prefix . 'guests_check_in';
     $tbl_event     = $wpdb->prefix . 'guests_check_in_event';
 
-
-    $sqlGuests    = "SELECT * FROM $tbl_guests WHERE barcode = '$a_barcode' OR app_code = '$a_barcode'";
-    $row   = $wpdb->get_row($sqlGuests, ARRAY_A);
+    // BẢO MẬT: Chống SQL Injection
+    $sqlGuests = $wpdb->prepare(
+        "SELECT * FROM $tbl_guests WHERE (barcode = %s OR app_code = %s) LIMIT 1", 
+        $a_barcode, 
+        $a_barcode
+    );
+    $row = $wpdb->get_row($sqlGuests, ARRAY_A);
 
     if (!empty($row) && $row['status'] == 1) {
+        
+        $eventRow = $wpdb->get_row("SELECT ID FROM $tbl_event WHERE status = 1 LIMIT 1", ARRAY_A);
+        
+        $checkInCount = 0;
+        $lastCheckInDate = '';
+        $lastCheckInTime = '';
 
-        // add 11/10/2017 KIEM TRA SO LAN CHECK IN =======================================================================================  
-        $sql2 = "SELECT time, date,  (SELECT COUNT(*) FROM $tbl_check_in WHERE guests_id =" . $row['ID'] . ") as count FROM $tbl_check_in WHERE guests_id =" . $row['ID'] . " ORDER BY time DESC LIMIT 1";
-        $row2 = $wpdb->get_row($sql2, ARRAY_A);
-        // end ================================================================================================  
+        if (!empty($eventRow)) {
+            $eventId = $eventRow['ID'];
 
-        $sql3 = "SELECT ID FROM $tbl_event WHERE status = 1";
-        $eventRow = $wpdb->get_row($sql3, ARRAY_A);
+            // TỐI ƯU: Lấy thẳng giá trị số (string) thay vì lấy cả mảng
+            $sqlCount = $wpdb->prepare(
+                "SELECT COUNT(*) FROM $tbl_check_in WHERE guests_id = %d AND event_id = %d",
+                $row['ID'], 
+                $eventId
+            );
+            $checkInCount = $wpdb->get_var($sqlCount);
 
-        // UPDATE TABLE guests CHECK_IN 
-        $data = array('check_in' => 1);
-        $where = array('ID' => $row['ID']);
-        $wpdb->update($table, $data, $where);
+            $sqlLast = $wpdb->prepare(
+                "SELECT date, time FROM $tbl_check_in WHERE guests_id = %d AND event_id = %d ORDER BY date DESC, time DESC LIMIT 1",
+                $row['ID'], 
+                $eventId
+            );
+            $checkInLast = $wpdb->get_row($sqlLast, ARRAY_A);
+            
+            if ($checkInLast) {
+                $lastCheckInDate = $checkInLast['date'];
+                $lastCheckInTime = $checkInLast['time'];
+            }
 
-
-
-        $sql3 = "SELECT COUNT(*) As count FROM $tbl_check_in WHERE guests_id =" . $row['ID'] . " and event_id = " . $eventRow['ID'];
-        $checkInCount = $wpdb->get_row($sql3, ARRAY_A);
-
-        // 取得最後一筆的 dat 和 time
-        $sqlLast = "SELECT date, time FROM $tbl_check_in WHERE guests_id = " . $row['ID'] . " AND event_id = " . $eventRow['ID'] . " ORDER BY date DESC, time DESC LIMIT 1";
-        $checkInLast = $wpdb->get_row($sqlLast, ARRAY_A);
-
-
-        // ADD ROW CHECK IN INFO VAO TABLE  guests_check_in
-        $data2 = array(
-            'guests_id' => $row['ID'],
-            'event_id' => $eventRow['ID'],
-            'date' => date('m-d-Y'),
-            'time' => date('H:i:s'),
-            // 'kind' => $row['kind'],
-        );
-        $wpdb->insert($tbl_check_in, $data2);
-
-        // add 11/10/2017 GIA TRI TRA VE =======================================================================================                         
-        // LAY HINH ANH DAI DIEN
-        if (!empty($row['img'])) {
-            $img = "<img id='guest-pic'  name='guest-pic' src= '" . PART_IMAGES_GUESTS . $row['img'] . "'/>";
-        } else {
-            $img = "<img id= 'guest-pic' style='width:500px; opacity:0.2' name = 'guest-pic' src ='" . PART_IMAGES . 'logo.png' . "'/>";
+            $wpdb->insert(
+                $tbl_check_in, 
+                array(
+                    'guests_id' => $row['ID'],
+                    'event_id'  => $eventId,
+                    'date'      => date('m-d-Y'),
+                    'time'      => date('H:i:s'),
+                ), 
+                array('%d', '%d', '%s', '%s')
+            );
         }
+
+        $img = '';
+        if (!empty($row['img'])) {
+            $img = "<img id='guest-pic' name='guest-pic' class='img-fluid shadow-sm rounded' src='" . PART_IMAGES_GUESTS . esc_attr($row['img']) . "'/>";
+        } else {
+            $img = "<img id='guest-pic' name='guest-pic' class='img-fluid opacity-25' src='" . PART_IMAGES . "logo.png'/>";
+        }
+
         require_once DIR_CODES . 'my-list.php';
         $myList = new Codes_My_List();
 
         $info = array(
-            'FullName' => $row['full_name'],
-            'Country' => $myList->get_country($row['country']),
-            'Position' => $row['position'],
-            'Email' => $row['email'],
-            'Phone' => $row['phone'],
-            'Note' => $row['note'],
-            'Img' => $img,
-            'TotalTimes' => $checkInCount['count'],
-            'LastCheckIn' => $checkInLast['date'] . ' / ' . $checkInLast['time']
+            'FullName'    => $row['full_name'],
+            'Country'     => $myList->get_country($row['country']),
+            'Position'    => $row['position'],
+            'Email'       => $row['email'],
+            'Phone'       => $row['phone'],
+            'Note'        => $row['note'],
+            'Img'         => $img,
+            // SỬA LỖI Ở ĐÂY: Gán trực tiếp $checkInCount, tuyệt đối không dùng $checkInCount['count'] nữa
+            'TotalTimes'  => $checkInCount, 
+            'LastCheckIn' => $lastCheckInDate ? ($lastCheckInDate . ' / ' . $lastCheckInTime) : ''
         );
+
         $response = array('status' => 'done', 'message' => $row['ID'], 'info' => $info);
-        // end ================================================================================================     
+
     } elseif (!empty($row) && $row['status'] == 0) {
-        $response = array('status' => 'unactive', 'message' => 'chua kich hoat tai khoan');
+        $response = array('status' => 'unactive', 'message' => 'Tài khoản chưa kích hoạt');
     } else {
-        $response = array('status' => 'error', 'message' => '0000');
+        $response = array('status' => 'error', 'message' => 'Không tìm thấy mã vạch');
     }
 
-    echo json_encode($response);
+    // Gửi JSON và tự động ngắt an toàn
+    wp_send_json($response);
 }

@@ -1,234 +1,291 @@
-.check-in-space {
-    // display: flex;
-    // flex-direction: column;
-    // background-color: #ff0000;
-    .header {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        // background-color: red;
-        //background-image: url("../../images/BG-1300-20-12.jpg");
-        //background-size: 100% 100%;
-        //background-repeat: no-repeat;
-        //background-position: right calc(100% - 0px);
-        // height: 279px;
-        height: 200px;
-        border-bottom: 1px dotted #666;
-        background-color: #7e0101;
-        .logo {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            //color: $warningColor;
-            color: #fff;
-            margin: 1rem 0;
-            h2 {
-                font-family: DFKai, "BiauKai", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
-                font-size: 1.5rem;
-                letter-spacing: 0.8rem;
-                font-weight: bold;
-                text-shadow: 2px 2px 6px #a3a3a3;
-            }
-            h3 {
-                padding-top: 2px;
-                font-family: Arial, sans-serif;
-                font-size: 0.59rem;
-                font-weight: bold;
-            }
-            img {
-                width: 5rem;
-            }
-        }
-        .title {
-            text-align: left;
-            h1 {
-                // color: $warningColor;
-                color: #fff;
-                padding: 0rem 0 0.5rem;
-                font-family: "DFKai", Arial, sans-serif;
-                font-size: 2rem;
-                font-weight: bold;
-                text-shadow: 2px 2px 6px #a3a3a3;
-            }
-        }
-    }
-    .content {
-        display: flex;
-        flex-direction: row;
-        &-form {
-            flex: 1;
-            padding: 1rem;
-            // margin-bottom: 2rem 0rem 2rem 2rem;
-            input[type="text"] {
-                width: 70%;
-                height: 30px;
-            }
-            button {
-                width: 28%;
-                height: 30px;
-                font-weight: bold;
-                border-radius: 3px;
-                border: 0px;
-            }
-            div:nth-child(2) {
-                margin-top: 1rem;
-                #checkInCarousel {
-                    ul {
-                        .ad-list-item {
-                            display: flex;
-                            flex-direction: column;
-                            align-items: center;
-                            justify-content: center;
-                            min-height: 300px;
-                            border-bottom: 1px #666 dotted;
-                            padding: 1rem 0;
-                            img {
-                                width: 200px;
-                            }
-                            label {
-                                font-size: 1rem;
-                                font-weight: bold;
-                                color: $warningColor;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        &-info {
-            flex: 3;
-            .content-welcome {
-                display: flex;
-                flex-direction: row;
-                margin: 2rem 1rem;
-                font-family: DFKai, "BiauKai", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
-                F #last-check-in {
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: space-between;
-                    label {
-                        color: #999;
-                        font-size: 1rem;
-                    }
-                }
-                .guest_name {
-                    display: flex;
-                    justify-content: flex-start;
-                    padding-left: 25%;
-                    #guest_name {
-                        font-size: 3rem;
-                        color: rgb(9, 57, 88);
-                        letter-spacing: 3px;
-                        font-family: DFKai, "BiauKai", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial,
-                            sans-serif;
-                        text-shadow: 2px 2px 6px #a3a3a3;
-                    }
-                }
-                div {
-                    flex: 1;
-                    color: $warningColor;
-                    h2 {
-                        font-size: 2.5rem;
-                    }
-                    h3 {
-                        font-size: 1.2rem;
-                    }
-                }
-                div:nth-child(2) {
-                    text-align: center;
-                }
-            }
-            #guest-main {
-                display: flex;
-                flex-direction: row;
-                .guest-img {
-                    flex: 2;
-                    #guest-picture {
-                        text-align: center;
-                        img {
-                            width: 70%;
-                            border-radius: 0.5rem;
-                            border: 0.2rem #ccc solid;
-                        }
-                    }
-                }
-                .guest-info {
-                    flex: 1;
-                    > div {
-                        display: flex;
-                        flex-direction: row;
-                        padding: 0.7rem 0;
-                        border-bottom: 0px dotted #dfdede;
-                        label {
-                            font-size: 1rem;
-                            font-weight: bold;
-                            color: rgb(38, 93, 124);
-                        }
-                        label:nth-child(1) {
-                            color:  rgb(38, 93, 124);;
-                            margin-right: 1rem;
-                        }
-                    }
-                }
-            }
-            #barcode-error {
-                display: none;
-                font-size: 2rem;
-                font-weight: bold;
-                color: $warningColor;
-                text-align: center;
-                margin-top: 10%;
-            }
-            #barcode-unactive {
-                display: none;
-                font-size: 2rem;
-                font-weight: bold;
-                color: $warningColor;
-                text-align: center;
-                margin-top: 10%;
-            }
-        }
-    }
-}
-.my-waiting {
-    display: none;
-    background-color: rgba(0, 0, 0, 0.7);
-    position: absolute;
-    top: 0px;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    padding-top: 20%;
-    z-index: 5000;
-}
+$header-bg: #ffffff; // Nền trắng sạch sẽ
+$text-primary: #111663; // Xanh Navy lấy từ quả địa cầu logo CTCVN
+$text-digiwin: #02aff0; // Giữ nguyên màu brand Digiwin
+$text-content: #02658f; // Màu chữ nội dung chính
+$text-secondary: #666; // Màu chữ phụ, như subtitle hoặc thông tin phụ
 
-.ad-space {
+.my-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  //   border-bottom: 1px solid #e0e0e0; // Đổi viền dotted thành viền solid xám nhạt cho hiện đại
+
+  padding: 0.2rem 1rem; // Thêm chút padding hai bên cho thoáng
+  $bg-gradient-light: linear-gradient(0deg, #ffffff 0%, #d5e6f7 100%);
+  $bg-gradient-dark: linear-gradient(90deg, #0b132b 0%, #1c2541 100%);
+  position: relative;
+  // Cách gọi:
+  background: $bg-gradient-light; // Mặc định là gradient sáng
+
+  .logo {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
     align-items: center;
-    padding-top: 100px;
+    color: #016488; // Đổi màu chữ tối
+    //margin: 1rem 0;
+
+    h2 {
+      font-family:
+        DFKai, "BiauKai", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei",
+        Arial, sans-serif;
+      font-size: 1.7rem;
+      letter-spacing: 0.8rem;
+      font-weight: bold;
+      text-shadow: none; // Loại bỏ shadow để nhìn phẳng và sạch hơn
+      margin-bottom: 0.2rem;
+    }
+
+    h3 {
+      padding-top: 2px;
+      font-family: Arial, sans-serif;
+      font-size: 0.6rem; // Tăng xíu xiu cho dễ đọc
+      font-weight: bold;
+      letter-spacing: 0.5px;
+      color: #666; // Subtitle cho màu xám để phân cấp thị giác
+    }
 
     img {
-        width: 150px;
+      width: 6rem;
+      margin-right: 1rem; // Thêm khoảng cách giữa logo và chữ
     }
-    h3 {
-        margin-top: 1rem;
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: #02aff0;
-        font-family: DFKai, "BiauKai", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
+  }
+  .search-container {
+    display: flex;
+    justify-content: left; // Căn giữa thanh tìm kiếm ra giữa màn hình
+    margin: 0rem 0; // Khoảng cách với tiêu đề phía trên và nội dung phía dưới
+    width: 100%;
+    position: fixed; // Đặt vị trí cố định để luôn hiển thị khi cuộn
+    top: 0; // Đặt ở trên cùng
+    right: 0; // Đặt ở bên phải
+
+    .modern-search-box {
+      display: flex;
+      align-items: stretch; // Ép input và button có chiều cao bằng nhau
+      width: 200px; // Đặt chiều rộng cố định cho thanh tìm kiếm
+      max-width: 600px; // Độ rộng tối đa của thanh tìm kiếm
+      height: 40px; // KHÓA CHIỀU CAO tại đây để button không bị tràn viền
+      border-radius: 8px; // Bo góc
+      overflow: hidden; // Ép các thành phần con nằm gọn trong góc bo
+      border: 1px solid #111663; // Viền màu xanh Navy
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+
+      position: absolute;
+      right: 4px;
+      top: 15px;
+
+      input {
+        flex: 1; // Input chiếm toàn bộ không gian còn trống
+        border: none !important;
+        outline: none !important;
+        width: 100%;
+        padding: 0px;
+        font-size: 1rem;
+        color: #333;
+        background-color: #f8f7f76f;
+        margin: 0; // Reset margin mặc định
+        padding: 5px;
+      }
     }
+  }
 }
 
-//   .f-check-in{
-//     input[type="text"]{
-//         border-radius: 3px 0px 0px 3px;
-//         height: 15px;
+.title {
+  text-align: center;
+  // margin-bottom: 0.5rem;
+  margin-top: 1rem;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 0px;
 
-//     }
-//     input[type="button"]{
+  /* Phủ gradient lên viền (số 1 ở cuối là border-image-slice) */
+  border-image: linear-gradient(90deg, #fff 20%, #bfbfc0 50%, #fff 80%) 1;
+  h1 {
+    // color: $warningColor;
+    color: #016488;
+    padding: 0rem 0 0.5rem;
+    font-family: "DFKai", Arial, sans-serif;
+    font-size: 2.8rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 6px #a3a3a3;
+  }
+}
+.content {
+  display: flex;
+  flex-direction: column;
 
-//     }
+  &-info {
+    #guest-main {
+      display: none;
+      flex-direction: row;
+      background-color: #fff;
+      font-family:
+         "Noto Sans TC", "PingFang TC", "Microsoft JhengHei",
+        Arial, sans-serif;
+      .guest-img {
+        flex: 1;
+        display: flex;
+        justify-content: center; // Căn giữa khung ảnh
+        background-color: #efefef;
+        min-height: 80vh; // Đặt chiều cao tối thiểu để khung ảnh không bị co lại quá nhỏ
 
-//   }
+        #guest-picture {
+          width: 70%; // Độ rộng của khung
+          margin: 1rem;
+          img {
+            border-radius: 1rem !important; // Bo góc ảnh
+            width: 100%; // Ép ảnh lấp đầy khung 70%
+            display: block;
+            border: 0.2rem #ffffff solid;
+
+            /* BÓNG ĐỔ RA NGOÀI */
+            /* Cú pháp: lệch phải | lệch xuống | độ nhòe (blur) | màu sắc */
+            box-shadow: 1px 1px 30px rgba(0, 0, 0, 0.3) !important;
+          }
+        }
+      }
+      .guest-info {
+        flex: 1;
+        margin: 1rem;
+
+        .guest_name {
+          margin-top: 0.5rem;
+          display: flex;
+          flex-direction: column;
+
+          #guest_name {
+            text-align: center;
+            font-size: 4.5rem;
+            font-weight: bold;
+            color: $text-content;
+            // text-shadow: 3px 3px 8px #adacac;
+          }
+
+          #guest_position {
+            text-align: right;
+            padding-right: 10%;
+            margin-top: 1rem;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: $text-secondary;
+          }
+        }
+
+        .guest_contact {
+          text-align: left;
+    
+          display: flex;
+          flex-direction: row;
+          border-bottom: 1px dotted #e0e0e0;
+       
+      
+          .guest_contact_title {
+            font-size: 1.25rem;
+            font-weight: normal;
+            color: $text-secondary;
+            background-color: #e0e0e0;
+            padding: 1rem;
+            svg {
+              width: 1.5rem;
+              margin-right: 0.5rem;
+              fill: $text-secondary;
+            }
+          }
+          .guest_contact_content {
+            font-weight: bold;
+            font-size: 1.25rem;
+            margin-left: 1.5rem;
+            color: $text-secondary;
+            padding: 1rem;
+          }
+          #guest_country {
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-left: 0rem;
+            color: $text-secondary;
+          }
+        }
+
+        .check-in-success{
+          font-size: 2rem;
+          font-weight: bold;
+          color: green;
+          text-align: center;
+          margin-top: 10%;
+            svg {
+              width: 2rem;
+              margin-right: 0.5rem;
+              fill: green;
+            }
+
+        }
+      }
+    }
+    #barcode-error {
+      display: none;
+      font-size: 2rem;
+      font-weight: bold;
+      color: $warningColor;
+      text-align: center;
+      margin-top: 10%;
+    }
+    #barcode-unactive {
+      display: none;
+      font-size: 2rem;
+      font-weight: bold;
+      color: $warningColor;
+      text-align: center;
+      margin-top: 10%;
+    }
+    #load-new {
+      display: block;
+      font-size: 2rem;
+      font-weight: bold;
+      color: $text-content;
+      text-align: center;
+      margin-top: 0%;
+      img {
+        width: 100%;
+      }
+    }
+  }
+}
+
+#last-check-in {
+  margin-top: 0.8rem;
+  margin-right: 0.5rem;
+  font-size: 1rem;
+  color: #bab8b8;
+}
+
+.ad {
+  text-align: right;
+  position: fixed;
+  bottom: 2rem;
+  right: 5rem;
+
+  img {
+    width: 150px;
+    margin-right: 5.5rem;
+  }
+
+  h3 {
+    margin-top: 0.5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    color: $text-digiwin;
+    font-family:
+      DFKai, "BiauKai", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei",
+      Arial, sans-serif;
+  }
+}
+
+.my-waiting {
+  display: none;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 20%;
+  z-index: 5000;
+}

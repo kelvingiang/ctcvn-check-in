@@ -333,7 +333,7 @@ root {
 }
 
 .my-link-delete {
-  color: #0d507c;
+  color: #aa0303;
   font-weight: bold;
   font-size: 1.2rem;
   cursor: pointer;
@@ -614,202 +614,240 @@ input:focus::placeholder {
   width: 40%;
 }
 
-.input-wrapper {
-  position: relative;
-  display: inline-block;
-  width: 300px;
-}
-
-#txt-barcode {
-  width: 100%;
-  padding-right: 80px; /* 給按鈕預留空間 */
-  box-sizing: border-box;
-}
-
-#btn-submit {
-  position: absolute;
-  right: 0;
-  top: 0;
-  height: 100%;
-  border: none;
-  background-color: #7c7c7c;
-  color: white;
-  padding: 0 15px;
-  cursor: pointer;
-}
-
-.check-in-space .header {
-  display: flex;
-  flex-direction: column;
+.my-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
-  height: 200px;
-  border-bottom: 1px dotted #666;
-  background-color: #7e0101;
+  padding: 0.2rem 1rem;
+  position: relative;
+  background: linear-gradient(0deg, #ffffff 0%, #d5e6f7 100%);
 }
-.check-in-space .header .logo {
+.my-header .logo {
   display: flex;
   flex-direction: row;
   align-items: center;
-  color: #fff;
-  margin: 1rem 0;
+  color: #016488;
 }
-.check-in-space .header .logo h2 {
+.my-header .logo h2 {
   font-family: DFKai, "BiauKai", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   letter-spacing: 0.8rem;
   font-weight: bold;
-  text-shadow: 2px 2px 6px #a3a3a3;
+  text-shadow: none;
+  margin-bottom: 0.2rem;
 }
-.check-in-space .header .logo h3 {
+.my-header .logo h3 {
   padding-top: 2px;
   font-family: Arial, sans-serif;
-  font-size: 0.59rem;
+  font-size: 0.6rem;
   font-weight: bold;
+  letter-spacing: 0.5px;
+  color: #666;
 }
-.check-in-space .header .logo img {
-  width: 5rem;
-}
-.check-in-space .header .title {
-  text-align: left;
-}
-.check-in-space .header .title h1 {
-  color: #fff;
-  padding: 0rem 0 0.5rem;
-  font-family: "DFKai", Arial, sans-serif;
-  font-size: 2rem;
-  font-weight: bold;
-  text-shadow: 2px 2px 6px #a3a3a3;
-}
-.check-in-space .content {
-  display: flex;
-  flex-direction: row;
-}
-.check-in-space .content-form {
-  flex: 1;
-  padding: 1rem;
-}
-.check-in-space .content-form input[type=text] {
-  width: 70%;
-  height: 30px;
-}
-.check-in-space .content-form button {
-  width: 28%;
-  height: 30px;
-  font-weight: bold;
-  border-radius: 3px;
-  border: 0px;
-}
-.check-in-space .content-form div:nth-child(2) {
-  margin-top: 1rem;
-}
-.check-in-space .content-form div:nth-child(2) #checkInCarousel ul .ad-list-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 300px;
-  border-bottom: 1px #666 dotted;
-  padding: 1rem 0;
-}
-.check-in-space .content-form div:nth-child(2) #checkInCarousel ul .ad-list-item img {
-  width: 200px;
-}
-.check-in-space .content-form div:nth-child(2) #checkInCarousel ul .ad-list-item label {
-  font-size: 1rem;
-  font-weight: bold;
-  color: #0d507c;
-}
-.check-in-space .content-info {
-  flex: 3;
-}
-.check-in-space .content-info .content-welcome {
-  display: flex;
-  flex-direction: row;
-  margin: 2rem 1rem;
-  font-family: DFKai, "BiauKai", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
-}
-.check-in-space .content-info .content-welcome F #last-check-in {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.check-in-space .content-info .content-welcome F #last-check-in label {
-  color: #999;
-  font-size: 1rem;
-}
-.check-in-space .content-info .content-welcome .guest_name {
-  display: flex;
-  justify-content: flex-start;
-  padding-left: 25%;
-}
-.check-in-space .content-info .content-welcome .guest_name #guest_name {
-  font-size: 3rem;
-  color: rgb(9, 57, 88);
-  letter-spacing: 3px;
-  font-family: DFKai, "BiauKai", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
-  text-shadow: 2px 2px 6px #a3a3a3;
-}
-.check-in-space .content-info .content-welcome div {
-  flex: 1;
-  color: #0d507c;
-}
-.check-in-space .content-info .content-welcome div h2 {
-  font-size: 2.5rem;
-}
-.check-in-space .content-info .content-welcome div h3 {
-  font-size: 1.2rem;
-}
-.check-in-space .content-info .content-welcome div:nth-child(2) {
-  text-align: center;
-}
-.check-in-space .content-info #guest-main {
-  display: flex;
-  flex-direction: row;
-}
-.check-in-space .content-info #guest-main .guest-img {
-  flex: 2;
-}
-.check-in-space .content-info #guest-main .guest-img #guest-picture {
-  text-align: center;
-}
-.check-in-space .content-info #guest-main .guest-img #guest-picture img {
-  width: 70%;
-  border-radius: 0.5rem;
-  border: 0.2rem #ccc solid;
-}
-.check-in-space .content-info #guest-main .guest-info {
-  flex: 1;
-}
-.check-in-space .content-info #guest-main .guest-info > div {
-  display: flex;
-  flex-direction: row;
-  padding: 0.7rem 0;
-  border-bottom: 0px dotted #dfdede;
-}
-.check-in-space .content-info #guest-main .guest-info > div label {
-  font-size: 1rem;
-  font-weight: bold;
-  color: rgb(38, 93, 124);
-}
-.check-in-space .content-info #guest-main .guest-info > div label:nth-child(1) {
-  color: rgb(38, 93, 124);
+.my-header .logo img {
+  width: 6rem;
   margin-right: 1rem;
 }
-.check-in-space .content-info #barcode-error {
+.my-header .search-container {
+  display: flex;
+  justify-content: left;
+  margin: 0rem 0;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+.my-header .search-container .modern-search-box {
+  display: flex;
+  align-items: stretch;
+  width: 200px;
+  max-width: 600px;
+  height: 40px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #111663;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  position: absolute;
+  right: 4px;
+  top: 15px;
+}
+.my-header .search-container .modern-search-box input {
+  flex: 1;
+  border: none !important;
+  outline: none !important;
+  width: 100%;
+  padding: 0px;
+  font-size: 1rem;
+  color: #333;
+  background-color: rgba(248, 247, 247, 0.4352941176);
+  margin: 0;
+  padding: 5px;
+}
+
+.title {
+  text-align: center;
+  margin-top: 1rem;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 0px;
+  /* Phủ gradient lên viền (số 1 ở cuối là border-image-slice) */
+  border-image: linear-gradient(90deg, #fff 20%, #bfbfc0 50%, #fff 80%) 1;
+}
+.title h1 {
+  color: #016488;
+  padding: 0rem 0 0.5rem;
+  font-family: "DFKai", Arial, sans-serif;
+  font-size: 2.8rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 6px #a3a3a3;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+.content-info #guest-main {
   display: none;
+  flex-direction: row;
+  background-color: #fff;
+  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
+}
+.content-info #guest-main .guest-img {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  background-color: #efefef;
+  min-height: 80vh;
+}
+.content-info #guest-main .guest-img #guest-picture {
+  width: 70%;
+  margin: 1rem;
+}
+.content-info #guest-main .guest-img #guest-picture img {
+  border-radius: 1rem !important;
+  width: 100%;
+  display: block;
+  border: 0.2rem #ffffff solid;
+  /* BÓNG ĐỔ RA NGOÀI */
+  /* Cú pháp: lệch phải | lệch xuống | độ nhòe (blur) | màu sắc */
+  box-shadow: 1px 1px 30px rgba(0, 0, 0, 0.3) !important;
+}
+.content-info #guest-main .guest-info {
+  flex: 1;
+  margin: 1rem;
+}
+.content-info #guest-main .guest-info .guest_name {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+.content-info #guest-main .guest-info .guest_name #guest_name {
+  text-align: center;
+  font-size: 4.5rem;
+  font-weight: bold;
+  color: #02658f;
+}
+.content-info #guest-main .guest-info .guest_name #guest_position {
+  text-align: right;
+  padding-right: 10%;
+  margin-top: 1rem;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #666;
+}
+.content-info #guest-main .guest-info .guest_contact {
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px dotted #e0e0e0;
+}
+.content-info #guest-main .guest-info .guest_contact .guest_contact_title {
+  font-size: 1.25rem;
+  font-weight: normal;
+  color: #666;
+  background-color: #e0e0e0;
+  padding: 1rem;
+}
+.content-info #guest-main .guest-info .guest_contact .guest_contact_title svg {
+  width: 1.5rem;
+  margin-right: 0.5rem;
+  fill: #666;
+}
+.content-info #guest-main .guest-info .guest_contact .guest_contact_content {
+  font-weight: bold;
+  font-size: 1.25rem;
+  margin-left: 1.5rem;
+  color: #666;
+  padding: 1rem;
+}
+.content-info #guest-main .guest-info .guest_contact #guest_country {
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-left: 0rem;
+  color: #666;
+}
+.content-info #guest-main .guest-info .check-in-success {
   font-size: 2rem;
   font-weight: bold;
-  color: #0d507c;
+  color: green;
   text-align: center;
   margin-top: 10%;
 }
-.check-in-space .content-info #barcode-unactive {
+.content-info #guest-main .guest-info .check-in-success svg {
+  width: 2rem;
+  margin-right: 0.5rem;
+  fill: green;
+}
+.content-info #barcode-error {
   display: none;
   font-size: 2rem;
   font-weight: bold;
-  color: #0d507c;
+  color: #aa0303;
   text-align: center;
   margin-top: 10%;
+}
+.content-info #barcode-unactive {
+  display: none;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #aa0303;
+  text-align: center;
+  margin-top: 10%;
+}
+.content-info #load-new {
+  display: block;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #02658f;
+  text-align: center;
+  margin-top: 0%;
+}
+.content-info #load-new img {
+  width: 100%;
+}
+
+#last-check-in {
+  margin-top: 0.8rem;
+  margin-right: 0.5rem;
+  font-size: 1rem;
+  color: #bab8b8;
+}
+
+.ad {
+  text-align: right;
+  position: fixed;
+  bottom: 2rem;
+  right: 5rem;
+}
+.ad img {
+  width: 150px;
+  margin-right: 5.5rem;
+}
+.ad h3 {
+  margin-top: 0.5rem;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #02aff0;
+  font-family: DFKai, "BiauKai", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
 }
 
 .my-waiting {
@@ -822,22 +860,4 @@ input:focus::placeholder {
   text-align: center;
   padding-top: 20%;
   z-index: 5000;
-}
-
-.ad-space {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding-top: 100px;
-}
-.ad-space img {
-  width: 150px;
-}
-.ad-space h3 {
-  margin-top: 1rem;
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #02aff0;
-  font-family: DFKai, "BiauKai", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
 }
