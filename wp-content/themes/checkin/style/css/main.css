@@ -618,31 +618,35 @@ input:focus::placeholder {
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
-  padding: 0.2rem 1rem;
   position: relative;
-  background: linear-gradient(0deg, #ffffff 0%, #d5e6f7 100%);
+  background: linear-gradient(0deg, #ffffff 70%, #cbcbcb 100%);
 }
 .my-header .logo {
   display: flex;
   flex-direction: row;
   align-items: center;
-  color: #016488;
 }
-.my-header .logo h2 {
+.my-header .logo .cn-title {
   font-family: DFKai, "BiauKai", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
-  font-size: 1.7rem;
-  letter-spacing: 0.8rem;
+  font-size: 2.5rem;
+  letter-spacing: 0.3rem;
   font-weight: bold;
-  text-shadow: none;
   margin-bottom: 0.2rem;
+  padding-left: 1.8rem;
+  background: linear-gradient(to right, #016488, #26bcf3, #016488);
+  /* 2. Cắt nền theo hình chữ (Cần tiền tố -webkit- cho hầu hết trình duyệt) */
+  -webkit-background-clip: text;
+  background-clip: text;
+  /* 3. Làm chữ trong suốt */
+  color: transparent;
 }
-.my-header .logo h3 {
+.my-header .logo .en-title {
   padding-top: 2px;
   font-family: Arial, sans-serif;
-  font-size: 0.6rem;
+  font-size: 0.8rem;
   font-weight: bold;
   letter-spacing: 0.5px;
-  color: #666;
+  color: #016488;
 }
 .my-header .logo img {
   width: 6rem;
@@ -654,7 +658,7 @@ input:focus::placeholder {
   margin: 0rem 0;
   width: 100%;
   position: fixed;
-  top: 0;
+  top: 10px;
   right: 0;
 }
 .my-header .search-container .modern-search-box {
@@ -686,7 +690,6 @@ input:focus::placeholder {
 
 .title {
   text-align: center;
-  margin-top: 1rem;
   border-bottom: 2px solid transparent;
   padding-bottom: 0px;
   /* Phủ gradient lên viền (số 1 ở cuối là border-image-slice) */
@@ -694,46 +697,57 @@ input:focus::placeholder {
 }
 .title h1 {
   color: #016488;
-  padding: 0rem 0 0.5rem;
-  font-family: "DFKai", Arial, sans-serif;
-  font-size: 2.8rem;
+  padding: 1rem 0;
+  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
+  font-size: 2rem;
   font-weight: bold;
-  text-shadow: 2px 2px 6px #a3a3a3;
 }
 
 .content {
   display: flex;
   flex-direction: column;
+  position: relative;
+  min-height: 80vh;
+  background-image: url("../../images/bg.jpg");
+}
+.content-info {
+  flex: 1;
+  display: flex;
 }
 .content-info #guest-main {
+  flex: 1;
   display: none;
   flex-direction: row;
-  background-color: #fff;
   font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
 }
 .content-info #guest-main .guest-img {
-  flex: 1;
+  flex: 4;
   display: flex;
   justify-content: center;
-  background-color: #efefef;
-  min-height: 80vh;
+  background-color: rgba(243, 243, 243, 0.6588235294);
 }
 .content-info #guest-main .guest-img #guest-picture {
-  width: 70%;
-  margin: 1rem;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .content-info #guest-main .guest-img #guest-picture img {
   border-radius: 1rem !important;
   width: 100%;
   display: block;
-  border: 0.2rem #ffffff solid;
+  border: 0.4rem #fefdfd solid;
+  background-color: #ffffff;
+  margin: 1rem 0;
   /* BÓNG ĐỔ RA NGOÀI */
   /* Cú pháp: lệch phải | lệch xuống | độ nhòe (blur) | màu sắc */
   box-shadow: 1px 1px 30px rgba(0, 0, 0, 0.3) !important;
 }
 .content-info #guest-main .guest-info {
-  flex: 1;
-  margin: 1rem;
+  flex: 6;
+  margin: 0rem;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.7921568627);
 }
 .content-info #guest-main .guest-info .guest_name {
   margin-top: 0.5rem;
@@ -753,6 +767,13 @@ input:focus::placeholder {
   font-size: 2.5rem;
   font-weight: bold;
   color: #666;
+}
+.content-info #guest-main .guest-info .guest_contact_local {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #666;
+  text-align: left;
+  padding-bottom: 20px;
 }
 .content-info #guest-main .guest-info .guest_contact {
   text-align: left;
@@ -775,9 +796,10 @@ input:focus::placeholder {
 .content-info #guest-main .guest-info .guest_contact .guest_contact_content {
   font-weight: bold;
   font-size: 1.25rem;
-  margin-left: 1.5rem;
   color: #666;
   padding: 1rem;
+  flex: 1;
+  background-color: #ffffff;
 }
 .content-info #guest-main .guest-info .guest_contact #guest_country {
   font-weight: bold;
@@ -785,35 +807,36 @@ input:focus::placeholder {
   margin-left: 0rem;
   color: #666;
 }
-.content-info #guest-main .guest-info .check-in-success {
+.content-info #guest-main .guest-info .check-in-success div {
   font-size: 2rem;
   font-weight: bold;
-  color: green;
+  color: #0a5a04;
   text-align: center;
-  margin-top: 10%;
+  margin-top: 50px;
 }
-.content-info #guest-main .guest-info .check-in-success svg {
+.content-info #guest-main .guest-info .check-in-success div svg {
   width: 2rem;
   margin-right: 0.5rem;
-  fill: green;
+  fill: #0a5a04;
 }
-.content-info #barcode-error {
-  display: none;
-  font-size: 2rem;
-  font-weight: bold;
-  color: #aa0303;
-  text-align: center;
-  margin-top: 10%;
-}
+.content-info #barcode-error,
 .content-info #barcode-unactive {
+  flex: 1;
   display: none;
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: bold;
   color: #aa0303;
   text-align: center;
-  margin-top: 10%;
+  margin-top: 15%;
+}
+.content-info #barcode-error svg,
+.content-info #barcode-unactive svg {
+  width: 2.5rem;
+  margin-right: 0.5rem;
+  fill: #aa0303;
 }
 .content-info #load-new {
+  flex: 1;
   display: block;
   font-size: 2rem;
   font-weight: bold;
@@ -823,6 +846,24 @@ input:focus::placeholder {
 }
 .content-info #load-new img {
   width: 100%;
+  background-color: #ffffff;
+}
+.content-info .ad {
+  position: absolute;
+  text-align: right;
+  top: 500px;
+  right: 5rem;
+}
+.content-info .ad img {
+  width: 150px;
+  margin-right: 5.5rem;
+}
+.content-info .ad h3 {
+  margin-top: 0.5rem;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #02aff0;
+  font-family: DFKai, "BiauKai", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
 }
 
 #last-check-in {
@@ -830,24 +871,6 @@ input:focus::placeholder {
   margin-right: 0.5rem;
   font-size: 1rem;
   color: #bab8b8;
-}
-
-.ad {
-  text-align: right;
-  position: fixed;
-  bottom: 2rem;
-  right: 5rem;
-}
-.ad img {
-  width: 150px;
-  margin-right: 5.5rem;
-}
-.ad h3 {
-  margin-top: 0.5rem;
-  font-size: 2rem;
-  font-weight: bold;
-  color: #02aff0;
-  font-family: DFKai, "BiauKai", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
 }
 
 .my-waiting {

@@ -1,7 +1,7 @@
 <?php //Template Name: Check In Waiting ?>
 <?php get_template_part('templates/template', 'header') ?>
 <div>
-    <div class=" col-lg-12" style="text-align: center; height:300px; line-height: 300px;">
+    <div class=" col-lg-12 waiting-time ">
         <label ID="waiting_txt"><?php echo get_option('Waiting_text'); ?></label>
     </div>
 
@@ -9,7 +9,16 @@
 <?php get_template_part('templates/template', 'footer') ?>
 
 <style>
-    #waiting_txt {
+.waiting-time{
+    background-image: url('<?php echo PART_IMAGES . 'bg.jpg' ?>');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 80vh;
+    text-align: center;
+    padding-top: 100px;
+}   
+#waiting_txt {
         text-shadow: 2px 2px 8px #000000;
         padding-top: 8%;
         font-weight: bold;

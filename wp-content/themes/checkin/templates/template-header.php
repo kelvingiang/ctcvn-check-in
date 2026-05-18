@@ -33,18 +33,17 @@ $active_event = $model_event->getActiveItem();
         <div class="logo">
             <img src="<?php echo PART_IMAGES . 'logoctcvn.png' ?>" alt="ctcvn_logo" title="ctcvn_logo" />
             <div>
-                <h2>越南台灣商會聯合總</h2>
-                <h3>THE COUNCIL OF TAIWANESE CHAMBERS OF COMMERCE IN VIETNAM </h3>
+                <label class="cn-title">越南台灣商會聯合總</label>
+                <label class="en-title">THE COUNCIL OF TAIWANESE CHAMBERS OF COMMERCE IN VIETNAM </label>
             </div>
         </div>
-        <div >
-              <div class="search-container">
-        <div class="modern-search-box">
-            <input type="text" id="txt-barcode" name="txt-barcode" placeholder="輸入條碼 (Nhập mã vạch)..." required autocomplete="off" />
-            <div id="last-check-in"> </div>
-        </div>
-    </div>
-          
+        <div>
+            <div class="search-container">
+                <div class="modern-search-box">
+                    <input type="text" id="txt-barcode" name="txt-barcode" placeholder="輸入條碼 (Nhập mã vạch)..." required autocomplete="off" />
+                    <div id="last-check-in"> </div>
+                </div>
+            </div>
         </div>
     </div>
 
