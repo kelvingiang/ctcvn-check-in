@@ -23,9 +23,8 @@
     <?php wp_head(); ?>
 </head>
 <?php
-require_once DIR_MODEL . 'model-check-in-event-function.php';
-$model_event = new Model_Check_In_Event_Function();
-$active_event = $model_event->getActiveItem();
+// 2026-06-10: Chỉ cần khai báo global, phần xử lý logic đã được chuyển hoàn toàn sang index.php
+global $active_event;
 ?>
 
 <body>
@@ -47,6 +46,6 @@ $active_event = $model_event->getActiveItem();
         </div>
     </div>
 
-    <div class="title">
+    <div id="header-event-title">
         <h1><?php echo $active_event['title']; ?></h1>
     </div>

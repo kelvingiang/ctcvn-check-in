@@ -39,5 +39,9 @@ error_log
 /et-cache/
 /data/*
 
+# --- 7. Bỏ qua các thư mục chứa hình ảnh QR Code sinh ra tự động ---
+/wp-content/themes/checkin/images/qrcode/
+/wp-content/themes/checkin/images/qrcode_name/
+
 .DS_Store
 .DS_Store?

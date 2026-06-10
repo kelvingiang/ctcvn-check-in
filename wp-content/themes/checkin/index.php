@@ -1,4 +1,12 @@
-<?php get_template_part('templates/template', 'header') ?>
+<?php
+// 2026-06-10: Khởi tạo và lấy dữ liệu $active_event ngay tại index.php trước khi load header
+global $active_event;
+require_once DIR_MODEL . 'model-check-in-event-function.php';
+$model_event = new Model_Check_In_Event_Function();
+$active_event = $model_event->getActiveItem();
+
+get_template_part('templates/template', 'header');
+?>
 
 <div class="my-waiting">
     <img src="<?php echo PART_IMAGES . 'loading_pr2.gif' ?>" style=" width: 150px" />
@@ -7,8 +15,13 @@
 <div class="content">
     <div class="content-info">
         <div id="load-new">
-            <img src="<?php echo PART_IMAGES . 'bg/event-bg.jpg' ?>" />
+            <img src="<?php //echo PART_IMAGES . 'bg/event-bg.jpg' 
+                        ?>" />
+            <div class="load-new-info">
+                <label><?php echo $active_event['title']; ?></label>
+            </div>
         </div>
+
         <div id="barcode-error">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><!--!Font Awesome Free v7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
                 <path d="M320 64C334.7 64 348.2 72.1 355.2 85L571.2 485C577.9 497.4 577.6 512.4 570.4 524.5C563.2 536.6 550.1 544 536 544L104 544C89.9 544 76.8 536.6 69.6 524.5C62.4 512.4 62.1 497.4 68.8 485L284.8 85C291.8 72.1 305.3 64 320 64zM320 416C302.3 416 288 430.3 288 448C288 465.7 302.3 480 320 480C337.7 480 352 465.7 352 448C352 430.3 337.7 416 320 416zM320 224C301.8 224 287.3 239.5 288.6 257.7L296 361.7C296.9 374.2 307.4 384 319.9 384C332.5 384 342.9 374.3 343.8 361.7L351.2 257.7C352.5 239.5 338.1 224 319.8 224z" />
@@ -31,6 +44,13 @@
                     <label id="guest_position"></label>
                 </div>
 
+                <div class="check-in-success">
+                    <div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free v5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+                            <path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
+                        </svg>報到成功</div>
+                </div>
+
+
                 <div class="guest_contact_local">
                     <label id="guest_country" class="guest_contact_content"></label>
                 </div>
@@ -47,11 +67,7 @@
                         </svg>電話</label>
                     <label id="guest_phone" class="guest_contact_content"></label>
                 </div>
-                <div class="check-in-success">
-                    <div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free v5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
-                            <path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
-                        </svg>報到成功</div>
-                </div>
+
 
 
                 <div id="last-check-in-time"> </div>
@@ -59,8 +75,9 @@
         </div>
 
         <div class="ad">
-            <img src=" <?php echo PART_IMAGES . 'digiwin_logo.png' ?>" alt="ctcvn_logo" title="ctcvn_logo" /> </br>
-            <h3>鼎捷軟件(越南)維護製作</h3>
+            <!-- 2026-06-10: Sửa thẻ đóng sai cú pháp HTML (</br> thành <br/>) và lỗi khoảng trắng ở src -->
+            <img src="<?php echo PART_IMAGES . 'digiwin_logo.png' ?>" alt="ctcvn_logo" title="ctcvn_logo" /> <br />
+            <p class="ad-text">鼎捷軟件(越南)維護製作</p>
         </div>
     </div>
 </div>
@@ -86,8 +103,12 @@
         });
 
         function submitAction() {
+            jQuery("#header-event-title").show();
             var barcode = jQuery('#txt-barcode').val().trim();
             if (barcode != '') {
+                // 2026-06-10: Thêm class ad-two để thay đổi vị trí phần quảng cáo
+                jQuery('.ad').addClass('ad-two');
+                
                 jQuery('.my-waiting').css('display', 'block');
                 jQuery.ajax({
                     url: '<?php echo get_template_directory_uri() . '/ajax/updata-checkin.php' ?>', // lay doi tuong chuyen sang dang array
@@ -106,7 +127,8 @@
                             jQuery('#last-check-in, #last-check-in-time, #guest-main').css('display', 'flex');
                             jQuery('#last-check-in').children().remove();
                             jQuery('#last-check-in-time').children().remove();
-                            if (data.info.TotalTimes !== "0") {
+                            // 2026-06-10: Sửa so sánh !== "0" thành != 0 để phòng trường hợp TotalTimes trả về int thay vì string
+                            if (data.info.TotalTimes != 0) {
                                 jQuery('#last-check-in').append("<label>" + data.info
                                     .TotalTimes + "</label>");
                                 // jQuery('#last-check-in-time').append("<label>時間 : </label> <label>" + data.info
@@ -129,8 +151,7 @@
 
                         } else if (data.status === 'error') {
                             jQuery("#txt-barcode").val('');
-                            jQuery('#guest-main, #last-check-in, #last-check-in-time, #barcode-unactive, #guest_name').css('display',
-                                'none');
+                            jQuery('#guest-main, #last-check-in, #last-check-in-time, #barcode-unactive, #guest_name').css('display', 'none');
                             jQuery('#barcode-error').css('display', 'block');
                             jQuery('#load-new').css('display', 'none');
                             window.setTimeout(function() {
@@ -138,8 +159,7 @@
                             }, 100);
                         } else if (data.status === "unactive") {
                             jQuery("#txt-barcode").val('');
-                            jQuery('#guest-main, #last-check-in, #last-check-in-time, #barcode-error, #guest_name').css('display',
-                                'none');
+                            jQuery('#guest-main, #last-check-in, #last-check-in-time, #barcode-error, #guest_name').css('display', 'none');
                             jQuery('#barcode-unactive').css('display', 'block');
                             jQuery('#load-new').css('display', 'none');
                             window.setTimeout(function() {
@@ -148,7 +168,8 @@
                         }
                     },
                     error: function(xhr) {
-                        console.log(xhr.reponseText);
+                        // 2026-06-10: Sửa lỗi chính tả thuộc tính responseText
+                        console.log(xhr.responseText);
                         //console.log(data.status);
                     }
                 });

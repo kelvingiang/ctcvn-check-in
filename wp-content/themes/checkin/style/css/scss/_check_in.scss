@@ -96,10 +96,11 @@ $text-secondary: #666; // Màu chữ phụ, như subtitle hoặc thông tin ph�
   }
 }
 
-.title {
+#header-event-title {
   text-align: center;
   border-bottom: 2px solid transparent;
   padding-bottom: 0px;
+  display: none;
   /* Phủ gradient lên viền (số 1 ở cuối là border-image-slice) */
   border-image: linear-gradient(90deg, #fff 20%, #bfbfc0 50%, #fff 80%) 1;
   h1 {
@@ -118,8 +119,9 @@ $text-secondary: #666; // Màu chữ phụ, như subtitle hoặc thông tin ph�
   display: flex;
   flex-direction: column;
   position: relative;
-  min-height: 80vh;
-  background-image: url('../../images/bg.jpg');
+  min-height: 87vh;
+  /* 2026-06-10: Phủ thêm lớp màu trắng bán trong suốt (0.5) để giảm độ rõ của hình nền */
+  background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.5)), url("../../images/bg.jpg");
 
   &-info {
     flex: 1;
@@ -162,12 +164,17 @@ $text-secondary: #666; // Màu chữ phụ, như subtitle hoặc thông tin ph�
         flex: 6;
         margin: 0rem;
         padding: 1rem;
-        background-color: #ffffffca;
+        background-color: #ffffff3f;
 
         .guest_name {
           margin-top: 0.5rem;
           display: flex;
-          flex-direction: column;
+          /* 2026-06-10: Chuyển sang row để nằm trên 1 dòng, căn giữa và căn đáy chữ */
+          flex-direction: row;
+          justify-content: center;
+          align-items: baseline;
+          gap: 20px;
+          margin-bottom: 2rem;
 
           #guest_name {
             text-align: center;
@@ -179,20 +186,18 @@ $text-secondary: #666; // Màu chữ phụ, như subtitle hoặc thông tin ph�
 
           #guest_position {
             text-align: right;
-            padding-right: 10%;
-            margin-top: 1rem;
             font-size: 2.5rem;
             font-weight: bold;
             color: $text-secondary;
           }
         }
 
-        .guest_contact_local{
+        .guest_contact_local {
           font-size: 2rem;
           font-weight: bold;
           color: $text-secondary;
           text-align: left;
-          padding-bottom: 20px; 
+          padding-bottom: 20px;
         }
 
         .guest_contact {
@@ -208,7 +213,7 @@ $text-secondary: #666; // Màu chữ phụ, như subtitle hoặc thông tin ph�
             color: $text-secondary;
             background-color: #e0e0e0;
             padding: 1rem;
-          
+
             svg {
               width: 1.5rem;
               margin-right: 0.5rem;
@@ -233,13 +238,14 @@ $text-secondary: #666; // Màu chữ phụ, như subtitle hoặc thông tin ph�
 
         .check-in-success {
           div {
-            font-size: 2rem;
+            font-size: 1.5rem;
             font-weight: bold;
             color: #0a5a04;
-            text-align: center;
+            text-align: right;
             margin-top: 50px;
+            margin-right: 50px;
             svg {
-              width: 2rem;
+              width: 1.5rem;
               margin-right: 0.5rem;
               fill: #0a5a04;
             }
@@ -267,36 +273,56 @@ $text-secondary: #666; // Màu chữ phụ, như subtitle hoặc thông tin ph�
     #load-new {
       flex: 1;
       display: block;
-      font-size: 2rem;
-      font-weight: bold;
+
       color: $text-content;
       text-align: center;
-      margin-top: 0%;
+      /* 2026-06-10: Căn giữa ngang và cách top 100px */
+      margin: 200px auto 0 auto;
+      position: relative;
       img {
         width: 100%;
         background-color: #ffffff;
       }
+      .load-new-info {
+        /* 2026-06-10: Đổi về relative để nằm gọn trong thẻ load-new và ăn theo margin 100px */
+        position: relative;
+        font-family:
+          "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif; 
+        font-size: 3rem;
+        font-weight: bold;
+ 
+      }
     }
 
+    /* 2026-06-09: Đã fix lỗi khoảng trắng ẩn và điều chỉnh lại size chữ */
     .ad {
       position: absolute;
-      text-align: right;
-      top: 500px;
-      right: 5rem;
+      text-align: center;
+      /* 2026-06-10: Cố định quảng cáo ở góc dưới cùng bên phải màn hình */
+      bottom: 1rem;
+      right: 1rem;
+      
+      /* 2026-06-10: Chuyển vị trí ra giữa và cách top 50px khi có class ad-two */
+      &.ad-two {
+        bottom: auto;
+        right: auto;
+        top: 400px;
+        left: 70%;
+        transform: translateX(-50%);
+      }
 
       img {
         width: 150px;
-        margin-right: 5.5rem;
-      } 
+      } /* Đã quét sạch ký tự lỗi ở cuối dòng này */
 
-      h3 {
+      .ad-text {
+        display: block;
         margin-top: 0.5rem;
-        font-size: 2rem;
+        font-size: 1.5rem; /* Giảm xuống 1.2rem (khoảng 19px) để hiển thị vừa vặn */
         font-weight: bold;
         color: $text-digiwin;
         font-family:
-          DFKai, "BiauKai", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei",
-          Arial, sans-serif;
+          "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
       }
     }
   }

@@ -1,20 +1,25 @@
 <?php //Template Name: Check In Waiting ?>
 <?php get_template_part('templates/template', 'header') ?>
-<div>
-    <div class=" col-lg-12 waiting-time ">
-        <label ID="waiting_txt"><?php echo get_option('Waiting_text'); ?></label>
-    </div>
 
+<!-- 2026-06-10: Cập nhật cấu trúc HTML giống trang index để nhận chung style (background, ad) -->
+<div class="content">
+    <div class="content-info">
+        <div class=" col-lg-12 waiting-time ">
+            <label ID="waiting_txt"><?php echo get_option('Waiting_text'); ?></label>
+        </div>
+        <div class="ad">
+                <!-- 2026-06-10: Sửa thẻ đóng sai cú pháp HTML (</br> thành <br/>) và lỗi khoảng trắng ở src -->
+                <img src="<?php echo PART_IMAGES . 'digiwin_logo.png' ?>" alt="ctcvn_logo" title="ctcvn_logo" /> <br/>
+                <p class="ad-text">鼎捷軟件(越南)維護製作</p>
+        </div>
+    </div>
 </div>
 <?php get_template_part('templates/template', 'footer') ?>
 
 <style>
 .waiting-time{
-    background-image: url('<?php echo PART_IMAGES . 'bg.jpg' ?>');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 80vh;
+    /* 2026-06-10: Bỏ các thuộc tính background cũ, thay vào đó sử dụng style kế thừa từ .content */
+    flex: 1; /* Thêm flex: 1 để khối chiếm hết chiều rộng hiển thị nội dung */
     text-align: center;
     padding-top: 100px;
 }   
