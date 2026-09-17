@@ -32,7 +32,7 @@ global $active_event;
         <div class="logo">
             <img src="<?php echo PART_IMAGES . 'logoctcvn.png' ?>" alt="ctcvn_logo" title="ctcvn_logo" />
             <div>
-                <label class="cn-title">越南台灣商會聯合總</label>
+                <label class="cn-title">越南台灣商會聯合總會</label>
                 <label class="en-title">THE COUNCIL OF TAIWANESE CHAMBERS OF COMMERCE IN VIETNAM </label>
             </div>
         </div>
