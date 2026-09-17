@@ -41,11 +41,12 @@ error_log
 /wp-content/themes/checkin/images/qrcode/*
 /wp-content/themes/checkin/images/qrcode/.gitkeep
 
-/wp-content/themes/checkin/images/qrcode/*
+/wp-content/themes/checkin/images/qrcode_name/*
 /wp-content/themes/checkin/images/qrcode_name/.gitkeep
 
 /wp-content/vendor/*
 /wp-content/vendor/.gitkeep
+
 
 .DS_Store
 .DS_Store?
