@@ -35,13 +35,17 @@ error_log
 !/wp-content/themes/checkin/**
 
 # --- 6. 開發工具與系統快取 ---
-/css/
-/et-cache/
-/data/*
+
 
 # --- 7. Bỏ qua các thư mục chứa hình ảnh QR Code sinh ra tự động ---
-/wp-content/themes/checkin/images/qrcode/
-/wp-content/themes/checkin/images/qrcode_name/
+/wp-content/themes/checkin/images/qrcode/*
+/wp-content/themes/checkin/images/qrcode/.gitkeep
+
+/wp-content/themes/checkin/images/qrcode/*
+/wp-content/themes/checkin/images/qrcode_name/.gitkeep
+
+/wp-content/vendor/*
+/wp-content/vendor/.gitkeep
 
 .DS_Store
 .DS_Store?
